@@ -4,6 +4,13 @@ import * as Yup from "yup";
 import { Formik } from "formik";
 import { useState } from "react";
 
+interface FormValues {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
 const schema = Yup.object().shape({
   email: Yup.string().email().required(),
   password: Yup.string().min(6).required(),
@@ -37,13 +44,27 @@ const LoginPage = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input name="email" type="email" ref={register} />
-      <p>{errors.email?.message}</p>
-      <input name="password" type="password" ref={register} />
-      <p>{errors.password?.message}</p>
-      <button type="submit">Login</button>
-    </form>
+    <Formik
+      initialValues={formData}
+      validationSchema={schema}
+      onSubmit={handleSubmit}
+    >
+      {({ values, errors, handleSubmit, handleChange }) => (
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            name="email"
+            value={values.email}
+            onChange={handleChange}
+            placeholder="Enter your email"
+          />
+          <p>{errors.email?.message}</p>
+          <input name="password" type="password" ref={register} />
+          <p>{errors.password?.message}</p>
+          <button type="submit">Login</button>
+        </form>
+      )}
+    </Formik>
   );
 };
 
