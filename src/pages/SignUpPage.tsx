@@ -1,20 +1,12 @@
-// src/pages/Signup.tsx
-
-import React from "react";
 import { Formik, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import '../styles/Form.css'
 import { FormTitle } from "../constants";
+import { FormValues } from "../constants";
 
-interface SignupFormValues {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
 
 const SignUpPage: React.FC = () => {
-  const initialValues: SignupFormValues = {
+  const initialValues: FormValues = {
     name: "",
     email: "",
     password: "",
@@ -36,8 +28,8 @@ const SignUpPage: React.FC = () => {
   });
 
   const handleSubmit = (
-    values: SignupFormValues,
-    { setSubmitting }: FormikHelpers<SignupFormValues>
+    values: FormValues,
+    { setSubmitting }: FormikHelpers<FormValues>
   ) => {
     setTimeout(() => {
       console.log(values);

@@ -1,16 +1,11 @@
-import React, { useState } from "react";
 import { Formik, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import "../styles/Form.css";
 import { FormTitle } from "../constants";
-
-interface LoginFormValues {
-  email: string;
-  password: string;
-}
+import { FormValues } from "../constants";
 
 const LoginPage: React.FC = () => {
-  const initialValues: LoginFormValues = {
+  const initialValues: FormValues = {
     email: "",
     password: "",
   };
@@ -23,8 +18,8 @@ const LoginPage: React.FC = () => {
   });
 
   const handleSubmit = (
-    values: LoginFormValues,
-    { setSubmitting }: FormikHelpers<LoginFormValues>
+    values: FormValues,
+    { setSubmitting }: FormikHelpers<FormValues>
   ) => {
     setTimeout(() => {
       console.log(values);
