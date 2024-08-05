@@ -17,3 +17,8 @@ export interface FormValues {
   location?: string;
   volunteersCount?: number;
 }
+
+export interface MapClickHandlerProps {
+  setMarker: (coords: { lat: number; lng: number }) => void;
+  setValue: (name: string, value: string) => void;
+}
