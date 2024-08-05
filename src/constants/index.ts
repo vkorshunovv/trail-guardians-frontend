@@ -11,4 +11,9 @@ export interface FormValues {
   description?: string;
   coordinates?: string;
   uploadImage?: FileList;
+  eventName?: string;
+  date?: string;
+  time?: string;
+  location?: string;
+  volunteersCount?: number;
 }
