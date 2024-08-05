@@ -1,9 +1,9 @@
 import { Formik, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
-import '../styles/Form.css'
+import "../styles/Form.css";
 import { FormTitle } from "../constants";
 import { FormValues } from "../constants";
-
+import { signUp } from "../services/authService";
 
 const SignUpPage: React.FC = () => {
   const initialValues: FormValues = {
@@ -27,14 +27,27 @@ const SignUpPage: React.FC = () => {
       .required("Confirm Password is required"),
   });
 
-  const handleSubmit = (
+  const handleSubmit = async (
     values: FormValues,
     { setSubmitting }: FormikHelpers<FormValues>
   ) => {
-    setTimeout(() => {
-      console.log(values);
+    try {
+      const response = await signUp(
+        values.name!,
+        values.email,
+        values.password
+      );
+      console.log("Signup successful: ", response);
+      setTimeout(() => {
+        console.log(values);
+        setSubmitting(false);
+      }, 500);
+    } catch (error) {
+      console.log(
+        `Error occurs while submitting signup form: ${(error as Error).message}`
+      );
       setSubmitting(false);
-    }, 500);
+    }
   };
 
   return (
@@ -84,7 +97,7 @@ const SignUpPage: React.FC = () => {
               />
             </div>
             <button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "Loading..." : "Sign up"}
+              {isSubmitting ? "Loading..." : "Sign up"}
             </button>
           </form>
         )}

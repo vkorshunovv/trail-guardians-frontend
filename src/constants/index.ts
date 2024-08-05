@@ -8,4 +8,7 @@ export interface FormValues {
   email: string;
   password: string;
   confirmPassword?: string;
+  description?: string;
+  coordinates?: string;
+  uploadImage?: FileList;
 }

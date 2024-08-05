@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import "../styles/Form.css";
 import { FormTitle } from "../constants";
 import { FormValues } from "../constants";
+import { logIn } from "../services/authService";
 
 const LoginPage: React.FC = () => {
   const initialValues: FormValues = {
@@ -17,14 +18,25 @@ const LoginPage: React.FC = () => {
       .required("Password is required"),
   });
 
-  const handleSubmit = (
+  const handleSubmit = async (
     values: FormValues,
     { setSubmitting }: FormikHelpers<FormValues>
   ) => {
-    setTimeout(() => {
-      console.log(values);
+    try {
+      const response = await logIn(values.email, values.password);
+      //handle next logic
+      console.log("Login successful", " ", response);
+
+      setTimeout(() => {
+        console.log(values);
+        setSubmitting(false);
+      }, 500);
+    } catch (error) {
+      console.log(
+        `Error occurs while submitting login form: ${(error as Error).message}`
+      );
       setSubmitting(false);
-    }, 500);
+    }
   };
 
   return (
