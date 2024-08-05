@@ -2,14 +2,15 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
 const mapContainerStyle = {
-  height: "400px",
-  width: "100%",
+  height: "80vh",
+  width: "80vw",
   borderRadius: "30px",
+  margin: '10px'
 };
 
 const center = {
-  lat: 37.7749,
-  lng: -122.4194,
+  lat: 39.470242,
+  lng: -0.376800,
 };
 
 const MapComponent = () => {
