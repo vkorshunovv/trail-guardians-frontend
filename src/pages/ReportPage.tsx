@@ -1,11 +1,26 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import MapComponent from "../components/MapComponent";
-import { FormValues } from "../constants";
-import '../styles/Report.css'
+import { ReportData } from "../constants";
+import { createReport } from "../services/reportService";
+import "../styles/Report.css";
 
 const ReportPage = () => {
-  const { register, handleSubmit } = useForm<FormValues>();
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const { register, handleSubmit } = useForm<ReportData>();
+
+  const onSubmit: SubmitHandler<ReportData> = async (data) => {
+    try {
+      if (data.image && data.image.length > 0) {
+        const response = await createReport({
+          description: data.description,
+          coordinates: data.coordinates,
+          image: data.image,
+        });
+        console.log(response);
+      }
+    } catch (error) {
+      console.log("Error occured while submitting report: ", error);
+    }
+
     console.log(data);
   };
   return (
@@ -30,8 +45,8 @@ const ReportPage = () => {
             />
           </div>
           <div>
-            <label htmlFor="uploadImage">Upload Image:</label>
-            <input type="file" id="uploadImage" {...register("uploadImage")} />
+            <label htmlFor="image">Upload Image:</label>
+            <input type="file" id="image" {...register("image")} />
           </div>
           <button type="submit">Submit Report</button>
         </form>

@@ -8,9 +8,7 @@ export interface FormValues {
   email: string;
   password: string;
   confirmPassword?: string;
-  description?: string;
-  coordinates?: string;
-  uploadImage?: FileList;
+
   eventName?: string;
   date?: string;
   time?: string;
@@ -21,4 +19,10 @@ export interface FormValues {
 export interface MapClickHandlerProps {
   setMarker: (coords: { lat: number; lng: number }) => void;
   setValue: (name: string, value: string) => void;
+}
+
+export interface ReportData {
+  description: string;
+  coordinates: string;
+  image: FileList;
 }
