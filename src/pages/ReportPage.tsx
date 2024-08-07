@@ -9,25 +9,27 @@ const ReportPage = () => {
 
   const onSubmit: SubmitHandler<ReportData> = async (data) => {
     try {
+      console.log("Submitting report:", data);
       if (data.image && data.image.length > 0) {
         const response = await createReport({
           description: data.description,
           coordinates: data.coordinates,
           image: data.image,
         });
-        console.log(response);
+        console.log("Report submitted successfully:", response);
       }
     } catch (error) {
-      console.log("Error occured while submitting report: ", error);
+      console.log(
+        "Error occured while submitting report: ",
+        (error as Error).message
+      );
     }
-
-    console.log(data);
   };
   return (
     <div className="report-page-container">
       <section>
         <h1>Report a Trail Area</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
           <div>
             <label htmlFor="description">Description:</label>
             <input
@@ -46,8 +48,13 @@ const ReportPage = () => {
           </div>
           <div>
             <label htmlFor="image">Upload Image:</label>
-            <input type="file" id="image" {...register("image")} />
+            <input
+              type="file"
+              id="image"
+              {...(register("image"), { required: true })}
+            />
           </div>
+          {/* TODO Loading state */}
           <button type="submit">Submit Report</button>
         </form>
       </section>
