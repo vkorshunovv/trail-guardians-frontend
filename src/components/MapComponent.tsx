@@ -8,8 +8,9 @@ import {
 import "leaflet/dist/leaflet.css";
 import "../styles/Map.css";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MapClickHandlerProps } from "../constants";
+import { createReport, getReports } from "../services/reportService";
 
 const center = {
   lat: 39.470242,
@@ -31,6 +32,15 @@ const MapClickHandler = ({ setMarker, setValue }: MapClickHandlerProps) => {
 const MapComponent = () => {
   const { setValue } = useForm();
   const [marker, setMarker] = useState(center);
+  const [report, setReports] = useState([]);
+
+  useEffect(() => {
+    const fetchReports = async () => {
+      const fetchedReports = await getReports();
+      setReports(fetchedReports);
+    };
+    fetchReports();
+  }, []);
 
   return (
     <MapContainer id="report-map" zoom={10} center={center}>
