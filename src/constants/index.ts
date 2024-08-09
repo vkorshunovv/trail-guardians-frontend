@@ -22,7 +22,13 @@ export interface MapClickHandlerProps {
 }
 
 export interface ReportData {
+  id?: number;
   description: string;
   coordinates: string;
-  image: FileList;
+  image: File[];
+}
+
+export interface MapComponentProps {
+  reports: ReportData[];
+  setReports: React.Dispatch<React.SetStateAction<ReportData[]>>;
 }

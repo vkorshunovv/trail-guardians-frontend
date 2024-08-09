@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import MapComponent from "../components/MapComponent";
 import { ReportData } from "../constants";
@@ -5,7 +6,8 @@ import { createReport } from "../services/reportService";
 import "../styles/Report.css";
 
 const ReportPage = () => {
-  const { register, handleSubmit } = useForm<ReportData>();
+  const { register, handleSubmit, reset } = useForm<ReportData>();
+  const [reports, setReports] = useState<ReportData[]>([]);
 
   const onSubmit: SubmitHandler<ReportData> = async (data) => {
     try {
@@ -17,10 +19,12 @@ const ReportPage = () => {
           image: data.image,
         });
         console.log("Report submitted successfully:", response);
+        setReports((prevReports) => [...prevReports, response]);
+        reset();
       }
     } catch (error) {
       console.log(
-        "Error occured while submitting report: ",
+        "Error occurred while submitting report: ",
         (error as Error).message
       );
     }
@@ -51,14 +55,14 @@ const ReportPage = () => {
             <input
               type="file"
               id="image"
-              {...(register("image"), { required: true })}
+              {...register("image", { required: true })}
             />
           </div>
           {/* TODO Loading state */}
           <button type="submit">Submit Report</button>
         </form>
       </section>
-      <MapComponent />
+      <MapComponent reports={reports} setReports={setReports} />
     </div>
   );
 };
