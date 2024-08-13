@@ -45,26 +45,36 @@ const ReportPage = () => {
             <input
               type="text"
               id="description"
-              {...register("description", { required: true })}
-              //TODO error validation
+              {...register("description", {
+                required: "Description is required",
+              })}
             />
+            {errors.description && (
+              <p className="error">{errors.description.message}</p>
+            )}
           </div>
           <div>
             <label htmlFor="coordinates">GPS coordinates:</label>
             <input
               type="text"
               id="coordinates"
-              {...register("coordinates", { required: true })}
+              {...register("coordinates", {
+                required: "GPS coordinates is required",
+              })}
               placeholder="Click on map"
             />
+            {errors.coordinates && (
+              <p className="error">{errors.coordinates.message}</p>
+            )}
           </div>
           <div>
             <label htmlFor="image">Upload Image:</label>
             <input
               type="file"
               id="image"
-              {...register("image", { required: true })}
+              {...register("image", { required: "Image is required" })}
             />
+            {errors.image && <p className="error">{errors.image.message}</p>}
           </div>
           {/* TODO Loading state */}
           <button type="submit">Submit Report</button>

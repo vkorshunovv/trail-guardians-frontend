@@ -9,7 +9,7 @@
     box-sizing: border-box;
 }
 
-section {
+.report-page-container section {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
