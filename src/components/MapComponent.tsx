@@ -1,37 +1,13 @@
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  useMapEvents,
-} from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "../styles/Map.css";
-import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { MapClickHandlerProps, MapComponentProps } from "../constants";
+import { MapComponentProps, center } from "../constants";
 import { getReports } from "../services/reportService";
 import { LatLngExpression } from "leaflet";
+import MapClickHandler from "./MapClickHandler";
 
-const center = {
-  lat: 39.470242,
-  lng: -0.3768,
-};
-
-const MapClickHandler = ({ setMarker, setValue }: MapClickHandlerProps) => {
-  useMapEvents({
-    click(e) {
-      const coords = e.latlng;
-      setMarker(coords);
-      setValue("coordinates", `${coords.lat}, ${coords.lng}`);
-      console.log("Coordinates: ", coords);
-    },
-  });
-  return null;
-};
-
-const MapComponent = ({ reports, setReports }: MapComponentProps) => {
-  const { setValue } = useForm();
+const MapComponent = ({ reports, setReports, setValue }: MapComponentProps) => {
   const [marker, setMarker] = useState<LatLngExpression>(center);
 
   useEffect(() => {
@@ -66,9 +42,9 @@ const MapComponent = ({ reports, setReports }: MapComponentProps) => {
           );
         })}
 
-        <Marker position={marker}>
-          <Popup>GPS Coordinates: </Popup>
-        </Marker>
+      <Marker position={marker}>
+        <Popup>GPS Coordinates: </Popup>
+      </Marker>
     </MapContainer>
   );
 };

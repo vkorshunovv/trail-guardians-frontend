@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FormValues } from "../constants";
-import '../styles/EventCreation.css'
+import "../styles/EventCreation.css";
 
 const EventCreationPage = () => {
   const { register, handleSubmit } = useForm<FormValues>();

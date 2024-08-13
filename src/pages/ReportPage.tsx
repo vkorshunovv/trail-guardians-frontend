@@ -6,7 +6,13 @@ import { createReport } from "../services/reportService";
 import "../styles/Report.css";
 
 const ReportPage = () => {
-  const { register, handleSubmit, reset } = useForm<ReportData>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm<ReportData>();
   const [reports, setReports] = useState<ReportData[]>([]);
 
   const onSubmit: SubmitHandler<ReportData> = async (data) => {
@@ -40,6 +46,7 @@ const ReportPage = () => {
               type="text"
               id="description"
               {...register("description", { required: true })}
+              //TODO error validation
             />
           </div>
           <div>
@@ -48,6 +55,7 @@ const ReportPage = () => {
               type="text"
               id="coordinates"
               {...register("coordinates", { required: true })}
+              placeholder="Click on map"
             />
           </div>
           <div>
@@ -62,7 +70,11 @@ const ReportPage = () => {
           <button type="submit">Submit Report</button>
         </form>
       </section>
-      <MapComponent reports={reports} setReports={setReports} />
+      <MapComponent
+        reports={reports}
+        setReports={setReports}
+        setValue={setValue}
+      />
     </div>
   );
 };
