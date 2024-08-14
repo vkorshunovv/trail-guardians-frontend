@@ -1,19 +1,21 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Report from "./pages/Report";
-import Events from "./pages/Events";
+import HomePage from "./pages/HomePage";
+import ReportPage from "./pages/ReportPage";
+import EventCreationPage from "./pages/EventCreationPage";
 import NoPage from "./pages/NoPage";
+import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignUpPage";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/report" element={<Report />} />
-        <Route path="/events" element={<Events />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/report" element={<ReportPage />} />
+        <Route path="/create-event" element={<EventCreationPage />} />
         <Route path="*" element={<NoPage />} />
       </Routes>
     </BrowserRouter>
