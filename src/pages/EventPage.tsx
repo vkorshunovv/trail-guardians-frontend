@@ -44,6 +44,15 @@ const EventPage = () => {
     }
   };
 
+  const handleDeleteEvent = async (data) => {
+    try {
+      await deleteEvent(id);
+      setEvents(events.filter((event) => event.id !== id));
+    } catch (error) {
+      console.log("Error occured while handle delete event ", error);
+    }
+  };
+
   return <div>EventPage</div>;
 };
 
