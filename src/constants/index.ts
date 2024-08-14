@@ -5,9 +5,15 @@ export const FormTitle = {
   signup: "Please Sign Up as a Trail Guardian",
 };
 
-export const center = {
-  lat: 39.470242,
-  lng: -0.3768,
+export const Center = {
+  lat: 40.416775,
+  lng: -3.70379,
+};
+
+export const TileLayerAttr = {
+  url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  attribution:
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 };
 
 export interface FormValues {
