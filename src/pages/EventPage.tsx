@@ -28,6 +28,22 @@ const EventPage = () => {
     }
   };
 
+  const handleUpdateEvent = async (data) => {
+    try {
+      if (selectedEvent) {
+        const updatedEvent = await updateEvent(selectedEvent.id, data);
+        setEvents(
+          events.map((event) =>
+            event.id === selectedEvent.id ? updatedEvent : event
+          )
+        );
+        setSelectedEvent(null);
+      }
+    } catch (error) {
+      console.log("Error occurred while handle update event ", error);
+    }
+  };
+
   return <div>EventPage</div>;
 };
 
