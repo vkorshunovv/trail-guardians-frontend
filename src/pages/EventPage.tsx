@@ -53,7 +53,29 @@ const EventPage = () => {
     }
   };
 
-  return <div>EventPage</div>;
+  return (
+    <div>
+      <h1>Manage Events</h1>
+      <EventForm
+        onSubmit={selectedEvent ? handleUpdateEvent : handleCreateEvent}
+        initialData={selectedEvent}
+      />
+      <h2>Upcoming Events</h2>
+      <ul>
+        {events.map((event) => (
+          <li key={event.id}>
+            <h3>{event.title}</h3>
+            <p>{event.description}</p>
+            <p>{event.date}</p>
+            <p>{event.location}</p>
+            <p>Volunteers Needed: {event.volunteersNeeded}</p>
+            <button onClick={() => setSelectedEvent(event)}>Edit</button>
+            <button onClick={() => handleDeleteEvent(event.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default EventPage;
