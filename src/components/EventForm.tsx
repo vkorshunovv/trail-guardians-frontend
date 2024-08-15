@@ -10,6 +10,7 @@ const EventForm = ({ onSubmit, initialData }) => {
           type="text"
           id="title"
           {...register("title", { required: true })}
+          //TODO error validation
         />
       </div>
       <div>

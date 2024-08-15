@@ -36,3 +36,16 @@ export const deleteEvent = async (id) => {
     },
   });
 };
+
+export const joinEvent = async (id) => {
+  const response = await axios.put(
+    `${API_URL}/${id}/join`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+  return response.data;
+};

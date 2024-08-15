@@ -5,7 +5,7 @@ const API_URL = "http://localhost:5000/api/report";
 
 export const createReport = async (reportData: ReportData) => {
   const formData = new FormData();
-
+  
   formData.append("description", reportData.description);
   formData.append("coordinates", reportData.coordinates);
 

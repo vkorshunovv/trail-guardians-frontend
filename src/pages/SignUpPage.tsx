@@ -44,7 +44,7 @@ const SignUpPage: React.FC = () => {
       }, 500);
     } catch (error) {
       console.log(
-        `Error occurs while submitting signup form: ${(error as Error).message}`
+        `Error occurred while submitting signup form: ${(error as Error).message}`
       );
       setSubmitting(false);
     }

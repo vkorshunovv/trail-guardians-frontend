@@ -21,12 +21,6 @@ export interface FormValues {
   email: string;
   password: string;
   confirmPassword?: string;
-
-  eventName?: string;
-  date?: string;
-  time?: string;
-  location?: string;
-  volunteersCount?: number;
 }
 
 export interface MapClickHandlerProps {

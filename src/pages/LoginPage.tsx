@@ -24,7 +24,7 @@ const LoginPage: React.FC = () => {
   ) => {
     try {
       const response = await logIn(values.email, values.password);
-      //handle next logic
+      //TODO handle next logic
       console.log("Login successful", " ", response);
 
       setTimeout(() => {
@@ -33,7 +33,7 @@ const LoginPage: React.FC = () => {
       }, 500);
     } catch (error) {
       console.log(
-        `Error occurs while submitting login form: ${(error as Error).message}`
+        `Error occurred while submitting login form: ${(error as Error).message}`
       );
       setSubmitting(false);
     }

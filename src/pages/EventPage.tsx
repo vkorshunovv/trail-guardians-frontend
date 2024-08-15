@@ -5,6 +5,7 @@ import {
   getEvents,
   updateEvent,
   deleteEvent,
+  joinEvent,
 } from "../services/eventService";
 
 const EventPage = () => {
@@ -44,12 +45,25 @@ const EventPage = () => {
     }
   };
 
-  const handleDeleteEvent = async (data) => {
+  const handleDeleteEvent = async (id) => {
     try {
       await deleteEvent(id);
       setEvents(events.filter((event) => event.id !== id));
     } catch (error) {
       console.log("Error occured while handle delete event ", error);
+    }
+  };
+
+  const handleJoinEvent = async (id) => {
+    try {
+      const updatedEvent = await joinEvent(id);
+      setEvents(
+        events.map((event) =>
+          event.id === updatedEvent.id ? updatedEvent : event
+        )
+      );
+    } catch (error) {
+      console.log(`Error occurred while joining to event`, error);
     }
   };
 
@@ -69,6 +83,7 @@ const EventPage = () => {
             <p>{event.date}</p>
             <p>{event.location}</p>
             <p>Volunteers Needed: {event.volunteersNeeded}</p>
+            <button onClick={() => handleJoinEvent(event.id)}>Join</button>
             <button onClick={() => setSelectedEvent(event)}>Edit</button>
             <button onClick={() => handleDeleteEvent(event.id)}>Delete</button>
           </li>
