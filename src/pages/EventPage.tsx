@@ -7,6 +7,7 @@ import {
   deleteEvent,
   joinEvent,
 } from "../services/eventService";
+import { formatDate } from "../utils/dateFormat";
 
 const EventPage = () => {
   const [events, setEvents] = useState([]);
@@ -25,7 +26,7 @@ const EventPage = () => {
       const newEvent = await createEvent(data);
       setEvents((prevEvents) => [...prevEvents, newEvent]);
     } catch (error) {
-      console.log("Error occurred while handle create event ", error);
+      console.log("Error occurred while handle create event: ", error);
     }
   };
 
@@ -80,9 +81,10 @@ const EventPage = () => {
           <li key={event.id}>
             <h3>{event.title}</h3>
             <p>{event.description}</p>
-            <p>{event.date}</p>
+            <p>{formatDate(event.date)}</p>
             <p>{event.location}</p>
             <p>Volunteers Needed: {event.volunteersNeeded}</p>
+            <p>Volunteers Signed Up: {event.volunteersSignedUp}</p>
             <button onClick={() => handleJoinEvent(event.id)}>Join</button>
             <button onClick={() => setSelectedEvent(event)}>Edit</button>
             <button onClick={() => handleDeleteEvent(event.id)}>Delete</button>

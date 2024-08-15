@@ -14,6 +14,15 @@ const EventForm = ({ onSubmit, initialData }) => {
         />
       </div>
       <div>
+        <label htmlFor="description">Description:</label>
+        <input
+          type="text"
+          id="description"
+          {...register("description", { required: true })}
+          //TODO error validation
+        />
+      </div>
+      <div>
         <label htmlFor="date">Date:</label>
         <input
           type="datetime-local"
@@ -31,13 +40,13 @@ const EventForm = ({ onSubmit, initialData }) => {
         />
       </div>
       <div>
-        <label htmlFor="volunteersNeeded">Number of Volunteers Needed:</label>
+        <label htmlFor="volunteersNeeded">Volunteers Needed:</label>
         <input
           type="number"
           id="volunteersNeeded"
           {...register("volunteersNeeded", { required: true })}
           placeholder="2"
-          min={2}
+          min={1}
           max={100}
         />
       </div>
