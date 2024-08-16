@@ -1,3 +1,9 @@
+/* .events-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
 .event-create-container {
     max-width: 400px;
     margin: 0 auto;

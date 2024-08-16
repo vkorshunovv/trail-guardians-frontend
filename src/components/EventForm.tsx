@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
+import { EventData, EventFormProps } from "../constants";
 
-const EventForm = ({ onSubmit, initialData }) => {
-  const { register, handleSubmit } = useForm({ defaultValues: initialData });
+const EventForm = ({ onSubmit}: EventFormProps) => {
+  const { register, handleSubmit } = useForm<EventData>({
+  });
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>

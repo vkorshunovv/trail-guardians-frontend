@@ -1,4 +1,4 @@
-import { UseFormSetValue } from "react-hook-form";
+import { UseFormSetValue, SubmitHandler } from "react-hook-form";
 
 export const FormTitle = {
   login: "Please Log in to your account",
@@ -39,4 +39,18 @@ export interface MapComponentProps {
   reports: ReportData[];
   setReports: React.Dispatch<React.SetStateAction<ReportData[]>>;
   setValue: UseFormSetValue<ReportData>;
+}
+
+export interface EventData {
+  id: number;
+  title: string;
+  description: string;
+  date: string;
+  location: string;
+  volunteersNeeded: number;
+  volunteersSignedUp?: number;
+}
+
+export interface EventFormProps {
+  onSubmit: SubmitHandler<EventData>;
 }
