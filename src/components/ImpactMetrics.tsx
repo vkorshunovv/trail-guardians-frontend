@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { getImpactMetrics } from "../services/impactMetrics";
+import { getImpactMetrics } from "../services/impactService";
 import { MetricsData } from "../constants";
+import "../styles/ImpactMetrics.css";
 
 const ImpactMetrics = () => {
   const [metrics, setMetrics] = useState<MetricsData>({
@@ -18,11 +19,18 @@ const ImpactMetrics = () => {
   }, []);
 
   return (
-    <div>
+    <div className="impact-metrics">
       <h1>Impact Summary</h1>
-      <p>{`Total Events: ${metrics.totalEvents}`}</p>
-      <p>{`Total Trash Collected: ${metrics.totalTrashCollected} kg`}</p>
-      <p>{`Total Hours Volunteered: ${metrics.totalHoursVolunteered}`}</p>
+      <p>
+        Total Completed Events: <span>{metrics.totalEvents}</span>
+      </p>
+      <p>
+        Total Trash Collected: <span>{metrics.totalTrashCollected}</span> kg
+      </p>
+      <p>
+        Total Hours Volunteered: <span>{metrics.totalHoursVolunteered} </span>
+        hrs
+      </p>
     </div>
   );
 };

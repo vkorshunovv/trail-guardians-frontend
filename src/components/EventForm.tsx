@@ -1,9 +1,20 @@
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { EventData, EventFormProps } from "../constants";
 
-const EventForm = ({ onSubmit}: EventFormProps) => {
-  const { register, handleSubmit } = useForm<EventData>({
-  });
+const EventForm = ({ onSubmit }: EventFormProps) => {
+  const { register, handleSubmit, reset } = useForm<EventData>({});
+  const [loading, setLoading] = useState<string>("Save Event");
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
+
+  const onClickBtnHandle = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setLoading("Event Added");
+    setTimeout(() => {
+      reset();
+      setIsDisabled(true);
+    }, 2000);
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
@@ -52,7 +63,13 @@ const EventForm = ({ onSubmit}: EventFormProps) => {
           max={100}
         />
       </div>
-      <button type="submit">Save Event</button>
+      <button
+        type="submit"
+        onClick={(event) => onClickBtnHandle(event)}
+        disabled={isDisabled}
+      >
+        {loading}
+      </button>
     </form>
   );
 };
