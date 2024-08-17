@@ -54,3 +54,9 @@ export interface EventData {
 export interface EventFormProps {
   onSubmit: SubmitHandler<EventData>;
 }
+
+export interface MetricsData {
+  totalEvents: number;
+  totalTrashCollected: number;
+  totalHoursVolunteered: number;
+}
