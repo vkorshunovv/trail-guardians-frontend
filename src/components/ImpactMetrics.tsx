@@ -67,11 +67,11 @@ const ImpactMetrics = () => {
         <span>{metrics.totalEvents}</span>
       </div>
       <div>
-        <p>Total Trash Collected</p>
+        <p>Total Trash Collected </p>
         <span>{metrics.totalTrashCollected} kg</span>
       </div>
       <div>
-        <p>Total Hours Volunteered</p>
+        <p>Total Hours Volunteered </p>
         <span>{metrics.totalHoursVolunteered} hrs</span>
       </div>
     </div>

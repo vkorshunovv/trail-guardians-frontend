@@ -4,23 +4,37 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2.5rem;
+    font-size: 2rem;
 }
 
 .no-page-container {
-    width: 70vw;
     height: 70vh;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 15rem;
+}
+
+.no-page-container button {
+    display: none;
+}
+.no-page-container header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-page-message {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid white;
-    border-radius: 1rem;
-    background-color: rgb(0, 0, 0);
-    box-shadow: 8px 8px ;
-    padding: 1rem;
+    width: 100vw;
+    color: #000;
 }
 
-.no-page-container span {
+.no-page-message span {
     font-size: 5rem;
 }
-

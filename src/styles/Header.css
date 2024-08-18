@@ -13,6 +13,17 @@
     font-style: normal;
 }
 
+.header a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.header a:hover {
+    transition: all .3s ease;
+    color: #000;
+    text-decoration: none;
+}
+
 .header button {
     border-radius: .5rem;
     border: none;

@@ -1,11 +1,15 @@
-import '../styles/Header.css'
+import { Link } from "react-router-dom";
+import "../styles/Header.css";
 
 const Header = () => {
   return (
-    <div className="header">
-      <p>TrailGuardians</p>
+    <header className="header">
+      <Link to="/" reloadDocument>
+        <p>TrailGuardians</p>
+      </Link>
+
       <button>Sign up</button>
-    </div>
+    </header>
   );
 };
 
