@@ -20,17 +20,19 @@ const ImpactMetrics = () => {
 
   return (
     <div className="impact-metrics">
-      <h1>Impact Summary</h1>
-      <p>
-        Total Completed Events: <span>{metrics.totalEvents}</span>
-      </p>
-      <p>
-        Total Trash Collected: <span>{metrics.totalTrashCollected}</span> kg
-      </p>
-      <p>
-        Total Hours Volunteered: <span>{metrics.totalHoursVolunteered} </span>
-        hrs
-      </p>
+      {/* <h1>Impact Summary</h1> */}
+      <div>
+        <p>Total Completed Events: </p>
+        <span>{metrics.totalEvents}</span>
+      </div>
+      <div>
+        <p>Total Trash Collected: </p>
+        <span>{metrics.totalTrashCollected} kg</span>
+      </div>
+      <div>
+        <p>Total Hours Volunteered:</p>
+        <span>{metrics.totalHoursVolunteered} hrs</span>
+      </div>
     </div>
   );
 };
