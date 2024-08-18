@@ -26,3 +26,14 @@
     color: #fff;
     background-color: rgb(57, 112, 151);
 }
+
+.header button:hover {
+    transition: all .3s ease;
+    background-color: rgb(255, 255, 255);
+    color: rgb(81, 138, 88);
+}
+
+.header button:active {
+    transition: scale .3s ease;
+    transform: scale(0.9);
+}

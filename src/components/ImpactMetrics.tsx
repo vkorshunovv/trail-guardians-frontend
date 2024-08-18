@@ -9,28 +9,69 @@ const ImpactMetrics = () => {
     totalTrashCollected: 0,
     totalHoursVolunteered: 0,
   });
+  const [targetMetrics, setTargetMetrics] = useState<MetricsData | null>(null);
 
   useEffect(() => {
     const fetchMetrics = async () => {
       const data = await getImpactMetrics();
-      setMetrics(data);
+      setTargetMetrics(data);
     };
     fetchMetrics();
   }, []);
 
+  useEffect(() => {
+    if (targetMetrics) {
+      const intervalId = setInterval(() => {
+        setMetrics((prevMetrics) => {
+          const { totalEvents, totalTrashCollected, totalHoursVolunteered } =
+            prevMetrics;
+
+          const increment = 1;
+          const newTotalEvents = Math.min(
+            totalEvents + increment,
+            targetMetrics.totalEvents
+          );
+          const newTrashCollected = Math.min(
+            totalTrashCollected + (increment + 2),
+            targetMetrics.totalTrashCollected
+          );
+          const newHoursVolunteered = Math.min(
+            totalHoursVolunteered + (increment + 4),
+            targetMetrics.totalHoursVolunteered
+          );
+
+          if (
+            newTotalEvents >= targetMetrics.totalEvents &&
+            newTrashCollected >= targetMetrics.totalTrashCollected &&
+            newHoursVolunteered >= targetMetrics.totalHoursVolunteered
+          ) {
+            clearInterval(intervalId);
+          }
+
+          return {
+            totalEvents: newTotalEvents,
+            totalTrashCollected: newTrashCollected,
+            totalHoursVolunteered: newHoursVolunteered,
+          };
+        });
+      }, 50);
+
+      return () => clearInterval(intervalId);
+    }
+  }, [targetMetrics]);
+
   return (
     <div className="impact-metrics">
-      {/* <h1>Impact Summary</h1> */}
       <div>
-        <p>Total Completed Events: </p>
+        <p>Total Completed Events</p>
         <span>{metrics.totalEvents}</span>
       </div>
       <div>
-        <p>Total Trash Collected: </p>
+        <p>Total Trash Collected</p>
         <span>{metrics.totalTrashCollected} kg</span>
       </div>
       <div>
-        <p>Total Hours Volunteered:</p>
+        <p>Total Hours Volunteered</p>
         <span>{metrics.totalHoursVolunteered} hrs</span>
       </div>
     </div>
