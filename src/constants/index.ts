@@ -60,3 +60,7 @@ export interface MetricsData {
   totalTrashCollected: number;
   totalHoursVolunteered: number;
 }
+
+export interface GreetingCardProps {
+  setMapVisible: (flipped: boolean) => void;
+}

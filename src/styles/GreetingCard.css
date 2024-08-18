@@ -1,0 +1,29 @@
+.greeting-card {
+    height: 49vh;
+    border-radius: 1.5rem;
+    border: 5px solid white;
+    padding: 1rem;
+    text-wrap: pretty;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.greeting-card p {
+    font-size: 1.2rem;
+}
+
+.greeting-card ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.greeting-card button {
+    border: none;
+    border-radius: .2rem;
+    padding: 0.5rem 1rem;
+    font-family: "Poppins", sans-serif;
+}

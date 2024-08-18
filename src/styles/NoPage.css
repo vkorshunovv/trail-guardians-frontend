@@ -25,6 +25,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
+}
+.no-page-container header p {
+    color: #000;
+}
+
+.no-page-container header p:hover {
+    color: #fff;
 }
 
 .no-page-message {
@@ -32,7 +40,6 @@
     justify-content: center;
     align-items: center;
     width: 100vw;
-    color: #000;
 }
 
 .no-page-message span {
