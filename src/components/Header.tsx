@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
+import { HeaderProps } from "../constants";
 import "../styles/Header.css";
 
-const Header = () => {
+const Header = ({ setModalOpen }: HeaderProps) => {
   return (
     <header className="header">
       <Link to="/" reloadDocument>
         <p>TrailGuardians</p>
       </Link>
 
-      <button>Sign up</button>
+      <button onClick={() => setModalOpen(true)}>Sign up</button>
     </header>
   );
 };

@@ -1,8 +1,6 @@
 import { Formik, Field, ErrorMessage, FormikHelpers } from "formik";
-import * as Yup from "yup";
 import "../styles/Form.css";
-import { FormTitle } from "../constants";
-import { FormValues } from "../constants";
+import { FormTitle, validationSchema, FormValues } from "../constants";
 import { signUp } from "../services/authService";
 
 const SignUpPage: React.FC = () => {
@@ -12,20 +10,6 @@ const SignUpPage: React.FC = () => {
     password: "",
     confirmPassword: "",
   };
-
-  const validationSchema = Yup.object().shape({
-    name: Yup.string()
-      .min(2, "Name must be minimum 2 characters")
-      .max(100, "Name must not be more than 100 characters")
-      .required("Name is required"),
-    email: Yup.string().email("Invalid email").required("Email is required"),
-    password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password")], "Passwords must match")
-      .required("Confirm Password is required"),
-  });
 
   const handleSubmit = async (
     values: FormValues,
@@ -44,7 +28,9 @@ const SignUpPage: React.FC = () => {
       }, 500);
     } catch (error) {
       console.log(
-        `Error occurred while submitting signup form: ${(error as Error).message}`
+        `Error occurred while submitting signup form: ${
+          (error as Error).message
+        }`
       );
       setSubmitting(false);
     }
@@ -61,7 +47,7 @@ const SignUpPage: React.FC = () => {
         {({ isSubmitting, errors, handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="name">Name:</label>
+              <label htmlFor="name">Name</label>
               <Field name="name" type="text" />
               <ErrorMessage
                 name="name"
@@ -70,7 +56,7 @@ const SignUpPage: React.FC = () => {
               />
             </div>
             <div>
-              <label htmlFor="email">Email:</label>
+              <label htmlFor="email">Email</label>
               <Field name="email" type="email" />
               <ErrorMessage
                 name="email"
@@ -79,16 +65,17 @@ const SignUpPage: React.FC = () => {
               />
             </div>
             <div>
-              <label htmlFor="password">Password:</label>
+              <label htmlFor="password">Password</label>
               <Field name="password" type="password" />
               <ErrorMessage
                 name="password"
                 component="div"
                 className={errors.password ? "error" : ""}
+                //TODO restrict to copy from this field
               />
             </div>
             <div>
-              <label htmlFor="confirmPassword">Confirm Password:</label>
+              <label htmlFor="confirmPassword">Confirm Password</label>
               <Field name="confirmPassword" type="password" />
               <ErrorMessage
                 name="confirmPassword"
@@ -96,9 +83,11 @@ const SignUpPage: React.FC = () => {
                 className={errors.confirmPassword ? "error" : ""}
               />
             </div>
-            <button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Loading..." : "Sign up"}
-            </button>
+            <div className="button-container">
+              <button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Loading..." : "Sign up"}
+              </button>
+            </div>
           </form>
         )}
       </Formik>
