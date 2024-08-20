@@ -1,55 +1,55 @@
 .modal-overlay {
-    background-color: rgba(0, 0, 0, 0.75);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    transition: opacity 0.3s ease-in-out;
-    opacity: 0;
-  }
-  
-  .modal-content {
-    background: rgb(57, 112, 151);
-    padding: 2rem;
-    border-radius: 1rem;
-    width: 25vw;
-    max-width: 500px;
-    position: relative;
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  background-color: rgba(0, 0, 0, 0.75);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+}
+
+.modal-content {
+  background: rgb(57, 112, 151);
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 25vw;
+  max-width: 500px;
+  position: relative;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
   transform: translateY(-50px);
   opacity: 0;
-  }
-  
-  .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
+  margin-bottom: 4rem;
+}
 
-  .ReactModal__Overlay--after-open {
-    opacity: 1;
-  }
-  
-  .ReactModal__Content--after-open {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  
-  .ReactModal__Overlay--before-close {
-    opacity: 0;
-  }
-  
-  .ReactModal__Content--before-close {
-    transform: translateY(-50px);
-    opacity: 0;
-  }
-  
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Content--after-open {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+.ReactModal__Content--before-close {
+  transform: translateY(-50px);
+  opacity: 0;
+}

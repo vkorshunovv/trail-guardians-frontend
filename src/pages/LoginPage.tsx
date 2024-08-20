@@ -1,11 +1,10 @@
 import { Formik, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import "../styles/Form.css";
-import { FormTitle } from "../constants";
-import { FormValues } from "../constants";
+import { FormValues, LoginProps } from "../constants";
 import { logIn } from "../services/authService";
 
-const LoginPage: React.FC = () => {
+const LoginPage = ({ setLogin, setModalOpen }: LoginProps) => {
   const initialValues: FormValues = {
     email: "",
     password: "",
@@ -20,28 +19,29 @@ const LoginPage: React.FC = () => {
 
   const handleSubmit = async (
     values: FormValues,
-    { setSubmitting }: FormikHelpers<FormValues>
+    { setSubmitting, resetForm }: FormikHelpers<FormValues>
   ) => {
     try {
       const response = await logIn(values.email, values.password);
-      //TODO handle next logic
       console.log("Login successful", " ", response);
-
-      setTimeout(() => {
-        console.log(values);
-        setSubmitting(false);
-      }, 500);
+      resetForm();
+      setLogin(true);
+      setModalOpen(false);
+      setSubmitting(false);
     } catch (error) {
       console.log(
-        `Error occurred while submitting login form: ${(error as Error).message}`
+        `Error occurred while submitting login form: ${
+          (error as Error).message
+        }`
       );
       setSubmitting(false);
+      //TODO popup message with following error on the screen
     }
   };
 
   return (
     <div className="form-container">
-      <h1>{FormTitle.login}</h1>
+      <h1>Please Log in to your account</h1>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -67,9 +67,11 @@ const LoginPage: React.FC = () => {
                 className={errors.password ? "error" : ""}
               />
             </div>
-            <button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Loading..." : "Login"}
-            </button>
+            <div className="button-container">
+              <button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Loading..." : "Log in"}
+              </button>
+            </div>
           </form>
         )}
       </Formik>

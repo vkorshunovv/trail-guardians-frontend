@@ -1,11 +1,6 @@
 import { UseFormSetValue, SubmitHandler } from "react-hook-form";
 import * as Yup from "yup";
 
-export const FormTitle = {
-  login: "Please Log in to your account",
-  signup: "Please Sign Up as a New Trail Guardian",
-};
-
 export const Center = {
   lat: 40.416775,
   lng: -3.70379,
@@ -16,7 +11,6 @@ export const TileLayerAttr = {
   attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors </a>',
 };
-
 
 export const validationSchema = Yup.object().shape({
   name: Yup.string()
@@ -31,6 +25,13 @@ export const validationSchema = Yup.object().shape({
     .oneOf([Yup.ref("password")], "Passwords must match")
     .required("Confirmation is required"),
 });
+
+export const initialValues: FormValues = {
+  name: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
 export interface FormValues {
   name?: string;
@@ -89,4 +90,16 @@ export interface ModalProps {
 
 export interface HeaderProps {
   setModalOpen: (openned: boolean) => void;
+  isRegistered: boolean;
+  isLogin: boolean;
+}
+
+export interface SignUpProps {
+  setModalOpen: (openned: boolean) => void;
+  setRegistered: (registerred: boolean) => void;
+}
+
+export interface LoginProps {
+  setModalOpen: (openned: boolean) => void;
+  setLogin: (loggedin: boolean) => void;
 }

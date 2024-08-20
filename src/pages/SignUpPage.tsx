@@ -1,19 +1,17 @@
 import { Formik, Field, ErrorMessage, FormikHelpers } from "formik";
 import "../styles/Form.css";
-import { FormTitle, validationSchema, FormValues } from "../constants";
+import {
+  validationSchema,
+  FormValues,
+  initialValues,
+  SignUpProps,
+} from "../constants";
 import { signUp } from "../services/authService";
 
-const SignUpPage: React.FC = () => {
-  const initialValues: FormValues = {
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  };
-
+const SignUpPage = ({ setModalOpen, setRegistered }: SignUpProps) => {
   const handleSubmit = async (
     values: FormValues,
-    { setSubmitting }: FormikHelpers<FormValues>
+    { setSubmitting, resetForm }: FormikHelpers<FormValues>
   ) => {
     try {
       const response = await signUp(
@@ -22,10 +20,10 @@ const SignUpPage: React.FC = () => {
         values.password
       );
       console.log("Signup successful: ", response);
-      setTimeout(() => {
-        console.log(values);
-        setSubmitting(false);
-      }, 500);
+      resetForm();
+      setRegistered(true);
+      setModalOpen(false);
+      setSubmitting(false);
     } catch (error) {
       console.log(
         `Error occurred while submitting signup form: ${
@@ -33,12 +31,13 @@ const SignUpPage: React.FC = () => {
         }`
       );
       setSubmitting(false);
+      //TODO popup message with following error on the screen
     }
   };
 
   return (
     <div className="form-container">
-      <h1>{FormTitle.signup}</h1>
+      <h1>Please Sign Up as a New Trail Guardian</h1>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}

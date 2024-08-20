@@ -11,11 +11,27 @@ import { useState } from "react";
 const HomePage = () => {
   const [isMapVisible, setMapVisible] = useState<boolean>(false);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
+  const [isRegistered, setRegistered] = useState<boolean>(false);
+  const [isLogin, setLogin] = useState<boolean>(false);
+
   return (
     <div className="homepage">
-      <Header setModalOpen={setModalOpen} />
+      <Header
+        setModalOpen={setModalOpen}
+        isRegistered={isRegistered}
+        isLogin={isLogin}
+      />
       <Modal isOpen={isModalOpen} onRequestClose={() => setModalOpen(false)}>
-        <SignUpPage />
+        {isRegistered ? (
+          <LoginPage setLogin={setLogin} setModalOpen={setModalOpen} />
+        ) : (
+          <SignUpPage
+            setModalOpen={setModalOpen}
+            setRegistered={setRegistered}
+          />
+        )}
+
+        {/* <LoginPage setLogin={setLogin} setModalOpen={setModalOpen} /> */}
       </Modal>
       <div className={`flip-card ${isMapVisible && "flipped"}`}>
         <div className="flip-card-front">
