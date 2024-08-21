@@ -1,4 +1,10 @@
-import { UseFormSetValue, SubmitHandler } from "react-hook-form";
+import {
+  UseFormRegister,
+  FieldErrors,
+  UseFormHandleSubmit,
+  UseFormSetValue,
+  SubmitHandler,
+} from "react-hook-form";
 import * as Yup from "yup";
 
 export const Center = {
@@ -50,6 +56,14 @@ export interface ReportData {
   description: string;
   coordinates: string;
   image: FileList;
+}
+
+export interface ReportProps {
+  setReports: React.Dispatch<React.SetStateAction<ReportData[]>>;
+  register: UseFormRegister<ReportData>;
+  handleSubmit: UseFormHandleSubmit<ReportData>;
+  reset: () => void;
+  errors: FieldErrors<ReportData>;
 }
 
 export interface MapComponentProps {

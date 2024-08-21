@@ -1,61 +1,15 @@
-.report-page-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 1rem;
-    gap: 2rem;
-    box-sizing: border-box;
+.report {
+    margin-bottom: 4rem;
+    border-radius: 0 1.5rem 1.5rem 0;
+    background-color: rgb(56, 133, 138);
+    padding: 1rem;
+    transition: box-shadow .2s ease-in;
 }
 
-.report-page-container section {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+.report:hover {
+    box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.069)
 }
 
-
-.report-page-container div {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.report-page-container h1 {
-    margin-bottom: 1rem;
-}
-
-.report-page-container div {
-    margin-bottom: 1rem;
-}
-
-.report-page-container label {
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-.report-page-container input {
-    width: 100%;
-    flex: 1;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.report-page-container .error {
-    color: red;
-    font-size: 0.875rem;
-}
-
-.report-page-container button {
-    padding: 0.5rem 1rem;
-    background-color: rgb(81, 138, 88);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.report-page-container button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+.button-container #report-button {
+    width: 15vw;
 }

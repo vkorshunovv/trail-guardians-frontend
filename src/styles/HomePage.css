@@ -1,12 +1,29 @@
-.homepage {
+.homepage-container {
+    display: grid;
+    grid-template-columns: 25vw [col-start] 50vw [col-start] 25vw [col-start];
+    width: 100vw;
     height: 100vh;
+}
+
+.left-sidebar {
+    height: 100%;
+    width: 25vw;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.homepage {
+    max-height: 100vh;
     width: 50vw;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin: 3rem 11rem 5rem 11rem;
+    /* margin: 3rem 11rem 5rem 11rem; */
+    margin: 3rem 0 5rem;
     perspective: 1000px;
+    grid-column: 2 / span 1;
 }
 
 .flip-card {
@@ -31,4 +48,9 @@
 
 .flip-card-back {
     transform: rotateX(180deg);
+}
+
+.right-sidebar {
+    height: 100%;
+    width: 25vw;
 }

@@ -31,13 +31,15 @@ form {
     margin-bottom: 0.5rem;
 }
 
-.form-container input {
+.form-container input, .form-container textarea  {
     width: 15vw;
     flex: 1;
     padding: 0.5rem;
     border: 1px solid #ffffff;
     border-radius: 4px;
     font-family: "Poppins", sans-serif;
+    background-color: #fff;
+    color: #000;
 }
 
 .form-container .error {
