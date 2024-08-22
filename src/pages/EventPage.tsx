@@ -11,7 +11,6 @@ import { formatDate } from "../utils/dateFormat";
 import "../styles/Event.css";
 import { EventData } from "../constants";
 import { SubmitHandler } from "react-hook-form";
-// import MapComponent from "../components/MapComponent";
 
 const EventPage = () => {
   const [events, setEvents] = useState<EventData[]>([]);
@@ -55,7 +54,7 @@ const EventPage = () => {
       await deleteEvent(id);
       setEvents(events.filter((event) => event.id !== id));
     } catch (error) {
-      console.log("Error occured while handle delete event ", error);
+      console.log("Error occurred while handle delete event ", error);
     }
   };
 
@@ -73,33 +72,28 @@ const EventPage = () => {
   };
 
   return (
-    <section className="events-container">
-      <div className="event-create-container">
-        <h1>Manage Events</h1>
-        <EventForm
-          onSubmit={selectedEvent ? handleUpdateEvent : handleCreateEvent}
-        />
-        <h2>Upcoming Events</h2>
-        <ul>
-          {events.map((event) => (
-            <li key={event.id}>
-              <h3>{event.title}</h3>
-              <p>{event.description}</p>
-              <p>{formatDate(event.date)}</p>
-              <p>{event.location}</p>
-              <p>Volunteers Needed: {event.volunteersNeeded}</p>
-              <p>Volunteers Signed Up: {event.volunteersSignedUp}</p>
-              <button onClick={() => handleJoinEvent(event.id!)}>Join</button>
-              <button onClick={() => setSelectedEvent(event)}>Edit</button>
-              <button onClick={() => handleDeleteEvent(event.id!)}>
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-      {/* <MapComponent /> */}
-    </section>
+    <div className="form-container events">
+      <h1>Create Event</h1>
+      <EventForm
+        onSubmit={selectedEvent ? handleUpdateEvent : handleCreateEvent}
+      />
+      {/* <h2>Upcoming Events</h2>
+      <ul>
+        {events.map((event) => (
+          <li key={event.id}>
+            <h3>{event.title}</h3>
+            <p>{event.description}</p>
+            <p>{formatDate(event.date)}</p>
+            <p>{event.location}</p>
+            <p>Volunteers Needed {event.volunteersNeeded}</p>
+            <p>Volunteers Signed Up {event.volunteersSignedUp}</p>
+            <button onClick={() => handleJoinEvent(event.id)}>Join</button>
+            <button onClick={() => setSelectedEvent(event)}>Edit</button>
+            <button onClick={() => handleDeleteEvent(event.id)}>Delete</button>
+          </li>
+        ))}
+      </ul> */}
+    </div>
   );
 };
 

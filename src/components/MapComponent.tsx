@@ -23,9 +23,13 @@ const MapComponent = ({ reports, setReports, setValue }: MapComponentProps) => {
     };
     fetchReports();
   }, [setReports]);
-
+//TODO zoom out to fit all markers on mount
   return (
-    <MapContainer id="report-map" zoom={10} center={Center}>
+    <MapContainer
+      id="report-map"
+      zoom={10}
+      center={Center}
+    >
       <TileLayer
         url={TileLayerAttr.url}
         attribution={TileLayerAttr.attribution}
@@ -41,11 +45,11 @@ const MapComponent = ({ reports, setReports, setValue }: MapComponentProps) => {
             navigator.clipboard.writeText(text).then(() => {
               setNotification("Copied!");
               setTimeout(() => {
-                setNotification(null);
-              }, 2000);
+                setNotification("");
+              }, 1000);
             });
           };
-
+          // TODO Green markers to report markers and blue to current
           return (
             <Marker key={report.id} position={position}>
               <Popup>
@@ -70,7 +74,7 @@ const MapComponent = ({ reports, setReports, setValue }: MapComponentProps) => {
                   src={catImage} // TODO fix image display in popup from database
                   alt={report.description}
                   style={{
-                    maxWidth: "300px",
+                    maxWidth: "100px",
                     height: "auto",
                     borderRadius: "10px",
                   }}
@@ -79,10 +83,14 @@ const MapComponent = ({ reports, setReports, setValue }: MapComponentProps) => {
             </Marker>
           );
         })}
-
-      <Marker position={marker}></Marker>
+      {/* TODO popup GPS coordinates */}
+      <Marker position={marker}>
+        <Popup>GPS Coordinates:</Popup>
+      </Marker>
     </MapContainer>
   );
 };
 
 export default MapComponent;
+
+

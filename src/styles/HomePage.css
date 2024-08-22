@@ -53,4 +53,7 @@
 .right-sidebar {
     height: 100%;
     width: 25vw;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }

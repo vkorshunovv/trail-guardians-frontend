@@ -7,7 +7,7 @@ const MapClickHandler = ({ setMarker, setValue }: MapClickHandlerProps) => {
       const coords = e.latlng;
       setMarker(coords);
       setValue("coordinates", `${coords.lat}, ${coords.lng}`);
-      console.log("Coordinates: ", coords);
+      // console.log("Coordinates: ", coords);
     },
   });
   return null;

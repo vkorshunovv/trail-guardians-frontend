@@ -42,7 +42,7 @@ const ReportPage = ({
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
         <div>
           {/* TODO description length limit */}
-          <label htmlFor="description">Description:</label>
+          <label htmlFor="description">Description</label>
           <textarea
             // type="text"
             id="description"
@@ -56,7 +56,7 @@ const ReportPage = ({
           )}
         </div>
         <div>
-          <label htmlFor="coordinates">GPS coordinates:</label>
+          <label htmlFor="coordinates">GPS Coordinates</label>
           <input
             type="text"
             id="coordinates"
@@ -70,7 +70,7 @@ const ReportPage = ({
           )}
         </div>
         <div>
-          <label htmlFor="image">Upload Image:</label>
+          <label htmlFor="image">Upload Image</label>
           <input
             type="file"
             id="image"
@@ -80,7 +80,7 @@ const ReportPage = ({
           {errors.image && <p className="error">{errors.image.message}</p>}
         </div>
         <div className="button-container ">
-          <button type="submit" id="report-button">
+          <button type="submit" id="report-button" disabled={isLoading}>
             {isLoading ? "Loading..." : "Submit Report"}
           </button>
         </div>

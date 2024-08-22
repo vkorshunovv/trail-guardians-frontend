@@ -10,6 +10,7 @@ import { useState } from "react";
 import ReportPage from "./ReportPage";
 import { ReportData } from "../constants";
 import { useForm } from "react-hook-form";
+import EventPage from "./EventPage";
 
 const HomePage = () => {
   const [isMapVisible, setMapVisible] = useState<boolean>(false);
@@ -71,7 +72,9 @@ const HomePage = () => {
         <ImpactMetrics />
       </section>
 
-      <section className="right-sidebar"></section>
+      <section className="right-sidebar">
+        <EventPage />
+      </section>
     </div>
   );
 };
