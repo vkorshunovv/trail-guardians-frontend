@@ -83,7 +83,7 @@ export interface EventData {
   volunteersSignedUp?: number;
 }
 
-export interface EventPageProps {
+export interface EventProps {
   isRightSidebarOpen: boolean;
 }
 

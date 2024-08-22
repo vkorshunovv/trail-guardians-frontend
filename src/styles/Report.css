@@ -4,14 +4,16 @@
     background-color: rgb(56, 133, 138);
     padding: 1rem;
     transition: box-shadow .2s ease;
-    /* border: 1px solid white;
-    border-left: none; */
     position: fixed;
     left: -260px;
 }
 
 .report:hover {
     box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.069)
+}
+
+.report textarea {
+resize: none;
 }
 
 .button-container #report-button {

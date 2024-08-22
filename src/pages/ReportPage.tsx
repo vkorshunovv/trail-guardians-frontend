@@ -27,6 +27,7 @@ const ReportPage = ({
         console.log("Report submitted successfully:", response);
         setReports((prevReports) => [...prevReports, response]);
         reset();
+        setIsLoading(false);
       }
     } catch (error) {
       console.log(
@@ -35,7 +36,6 @@ const ReportPage = ({
       );
       setIsLoading(false);
     }
-    setIsLoading(false);
   };
   return (
     <div
@@ -51,8 +51,8 @@ const ReportPage = ({
           {/* TODO description length limit */}
           <label htmlFor="description">Description</label>
           <textarea
-            // type="text"
             id="description"
+            maxLength={50}
             {...register("description", {
               required: "Description is required",
             })}

@@ -23,13 +23,8 @@ const MapComponent = ({ reports, setReports, setValue }: MapComponentProps) => {
     };
     fetchReports();
   }, [setReports]);
-//TODO zoom out to fit all markers on mount
   return (
-    <MapContainer
-      id="report-map"
-      zoom={10}
-      center={Center}
-    >
+    <MapContainer id="report-map" zoom={7} center={Center}>
       <TileLayer
         url={TileLayerAttr.url}
         attribution={TileLayerAttr.attribution}
@@ -92,5 +87,3 @@ const MapComponent = ({ reports, setReports, setValue }: MapComponentProps) => {
 };
 
 export default MapComponent;
-
-

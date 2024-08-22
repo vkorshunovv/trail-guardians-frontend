@@ -9,10 +9,10 @@ import {
 } from "../services/eventService";
 import { formatDate } from "../utils/dateFormat";
 import "../styles/Event.css";
-import { EventData, EventPageProps } from "../constants";
+import { EventData, EventProps } from "../constants";
 import { SubmitHandler } from "react-hook-form";
 
-const EventPage = ({ isRightSidebarOpen }: EventPageProps) => {
+const EventPage = ({ isRightSidebarOpen }: EventProps) => {
   const [events, setEvents] = useState<EventData[]>([]);
   const [selectedEvent, setSelectedEvent] = useState<EventData | null>(null);
 
@@ -75,8 +75,8 @@ const EventPage = ({ isRightSidebarOpen }: EventPageProps) => {
     <div
       className={
         isRightSidebarOpen
-          ? "form-container events right-sidebar-open"
-          : "form-container events"
+          ? "form-container event right-sidebar-open"
+          : "form-container event"
       }
     >
       <h1>Create New Event</h1>

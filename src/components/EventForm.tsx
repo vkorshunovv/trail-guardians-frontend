@@ -9,16 +9,16 @@ const EventForm = ({ onSubmit }: EventFormProps) => {
     reset,
     formState: { errors },
   } = useForm<EventData>({});
-  const [loading, setLoading] = useState<string>("Create Event");
-  const [isDisabled, setIsDisabled] = useState<boolean>(false);
+  const [isLoading, setLoading] = useState<string>("Create Event");
+  const [isDisabled, setDisabled] = useState<boolean>(false);
 
-  const onClickBtnHandle = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setIsDisabled(true);
-    setLoading("Event Added");
-    setTimeout(() => {
-      reset();
-    }, 2000);
-  };
+  // const onClickBtnHandle = (event: React.MouseEvent<HTMLButtonElement>) => {
+  //   setDisabled(true);
+  //   setLoading("Event Added");
+  //   setTimeout(() => {
+  //     reset();
+  //   }, 2000);
+  // };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -27,6 +27,7 @@ const EventForm = ({ onSubmit }: EventFormProps) => {
         <input
           type="text"
           id="title"
+          maxLength={50}
           {...register("title", { required: "Title is required" })}
           placeholder="Max. 50 characters"
         />
@@ -77,11 +78,11 @@ const EventForm = ({ onSubmit }: EventFormProps) => {
       <div className="button-container ">
         <button
           type="submit"
-          id="events-button"
-          onClick={(e) => onClickBtnHandle(e)}
+          id="event-button"
+          // onClick={(e) => onClickBtnHandle(e)}
           disabled={isDisabled}
         >
-          {loading}
+          {isLoading}
         </button>
       </div>
     </form>

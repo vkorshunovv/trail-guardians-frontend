@@ -1,27 +1,25 @@
-.events {
+.event {
     margin-bottom: 4rem;
     border-radius: 1.5rem 0 0 1.5rem;
     background-color: rgb(186, 73, 73);
     padding: 1rem;
     transition: box-shadow .2s ease;
-    /* border: 1px solid white;
-    border-right: none; */
     position: fixed;
     right: -260px;
 }
 
-.events:hover {
+.event:hover {
     box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.069);
 
 }
 
-.button-container #events-button {
+.button-container #event-button {
     width: 15vw;
     background-color: rgb(76, 15, 15);
   
 }
 
-.button-container #events-button:hover {
+.button-container #event-button:hover {
     background-color: #fff;
     color: rgb(186, 73, 73);
 }
@@ -30,3 +28,5 @@
     transition: all .7s ease;
     right: 0;
 }
+
+/*TODO think about bundling styles with the same report styles
