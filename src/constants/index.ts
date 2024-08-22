@@ -64,6 +64,7 @@ export interface ReportProps {
   handleSubmit: UseFormHandleSubmit<ReportData>;
   reset: () => void;
   errors: FieldErrors<ReportData>;
+  isLeftSidebarOpen: boolean;
 }
 
 export interface MapComponentProps {
@@ -80,6 +81,10 @@ export interface EventData {
   location: string;
   volunteersNeeded: number;
   volunteersSignedUp?: number;
+}
+
+export interface EventPageProps {
+  isRightSidebarOpen: boolean;
 }
 
 export interface EventFormProps {

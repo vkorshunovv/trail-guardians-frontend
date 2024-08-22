@@ -5,6 +5,7 @@ import { createReport } from "../services/reportService";
 import "../styles/Report.css";
 
 const ReportPage = ({
+  isLeftSidebarOpen,
   setReports,
   register,
   handleSubmit,
@@ -37,7 +38,13 @@ const ReportPage = ({
     setIsLoading(false);
   };
   return (
-    <div className="form-container report">
+    <div
+      className={
+        isLeftSidebarOpen
+          ? "form-container report left-sidebar-open"
+          : "form-container report"
+      }
+    >
       <h1>Report a Trail Area</h1>
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
         <div>

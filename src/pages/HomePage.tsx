@@ -13,11 +13,13 @@ import { useForm } from "react-hook-form";
 import EventPage from "./EventPage";
 
 const HomePage = () => {
-  const [isMapVisible, setMapVisible] = useState<boolean>(false);
-  const [isModalOpen, setModalOpen] = useState<boolean>(false);
-  const [isRegistered, setRegistered] = useState<boolean>(false);
-  const [isLogin, setLogin] = useState<boolean>(false);
+  const [isMapVisible, setMapVisible] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [isRegistered, setRegistered] = useState(false);
+  const [isLogin, setLogin] = useState(false);
   const [reports, setReports] = useState<ReportData[]>([]);
+  const [isLeftSidebarOpen, setLeftSidebarOpen] = useState(false);
+  const [isRightSidebarOpen, setRightSidebarOpen] = useState(false);
 
   const {
     register,
@@ -30,7 +32,11 @@ const HomePage = () => {
   return (
     <div className="homepage-container">
       <section className="left-sidebar">
+        <button className="pull-btn" onClick={() => setLeftSidebarOpen(true)}>
+          Click to open
+        </button>
         <ReportPage
+          isLeftSidebarOpen={isLeftSidebarOpen}
           setReports={setReports}
           register={register}
           handleSubmit={handleSubmit}
@@ -73,7 +79,10 @@ const HomePage = () => {
       </section>
 
       <section className="right-sidebar">
-        <EventPage />
+        <button className="pull-btn" onClick={() => setRightSidebarOpen(true)}>
+          Click to open
+        </button>
+        <EventPage isRightSidebarOpen={isRightSidebarOpen} />
       </section>
     </div>
   );

@@ -9,7 +9,7 @@ const EventForm = ({ onSubmit }: EventFormProps) => {
     reset,
     formState: { errors },
   } = useForm<EventData>({});
-  const [loading, setLoading] = useState<string>("Save Event");
+  const [loading, setLoading] = useState<string>("Create Event");
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
   const onClickBtnHandle = (event: React.MouseEvent<HTMLButtonElement>) => {

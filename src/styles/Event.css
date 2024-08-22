@@ -1,15 +1,32 @@
 .events {
     margin-bottom: 4rem;
-    border-radius:  1.5rem 0 0 1.5rem ;
-    background-color: rgb(56, 133, 138);
+    border-radius: 1.5rem 0 0 1.5rem;
+    background-color: rgb(186, 73, 73);
     padding: 1rem;
     transition: box-shadow .2s ease;
+    /* border: 1px solid white;
+    border-right: none; */
+    position: fixed;
+    right: -260px;
 }
 
 .events:hover {
-    box-shadow: 5px 3px 10px rgba(0, 0, 0, 0.069)
+    box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.069);
+
 }
 
 .button-container #events-button {
     width: 15vw;
+    background-color: rgb(76, 15, 15);
+  
+}
+
+.button-container #events-button:hover {
+    background-color: #fff;
+    color: rgb(186, 73, 73);
+}
+
+.right-sidebar-open {
+    transition: all .7s ease;
+    right: 0;
 }

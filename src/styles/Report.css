@@ -4,6 +4,10 @@
     background-color: rgb(56, 133, 138);
     padding: 1rem;
     transition: box-shadow .2s ease;
+    /* border: 1px solid white;
+    border-left: none; */
+    position: fixed;
+    left: -260px;
 }
 
 .report:hover {
@@ -12,4 +16,9 @@
 
 .button-container #report-button {
     width: 15vw;
+}
+
+.left-sidebar-open {
+    transition: all .7s ease;
+    left: 0;
 }
