@@ -1,77 +1,40 @@
-import { useState, useEffect } from "react";
-import EventForm from "../components/EventForm";
-import {
-  createEvent,
-  getEvents,
-  updateEvent,
-  deleteEvent,
-  joinEvent,
-} from "../services/eventService";
-import { formatDate } from "../utils/dateFormat";
 import "../styles/Event.css";
+import { useState } from "react";
+import { createEvent } from "../services/eventService";
 import { EventData, EventProps } from "../constants";
 import { SubmitHandler } from "react-hook-form";
+import EventsListPage from "./EventsListPage";
 
-const EventPage = ({ isRightSidebarOpen }: EventProps) => {
-  const [events, setEvents] = useState<EventData[]>([]);
-  const [selectedEvent, setSelectedEvent] = useState<EventData | null>(null);
+const EventPage = ({
+  isRightSidebarOpen,
+  events,
+  setEvents,
+  register,
+  handleSubmit,
+  reset,
+  errors,
+  setEventCreated,
+  isEventCreated,
+}: EventProps) => {
+  const [isLoading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchEvents = async () => {
-      const fetchedEvents = await getEvents();
-      setEvents(fetchedEvents);
-    };
-    fetchEvents();
-  }, []);
-
-  const handleCreateEvent: SubmitHandler<EventData> = async (data) => {
+  const onSubmit: SubmitHandler<EventData> = async (data) => {
+    setLoading(true);
     try {
       const newEvent = await createEvent(data);
       setEvents((prevEvents) => [...prevEvents, newEvent]);
+      reset();
+      setLoading(false);
+      setEventCreated(true);
     } catch (error) {
       console.log("Error occurred while handle create event: ", error);
+      setLoading(false);
     }
   };
 
-  const handleUpdateEvent: SubmitHandler<EventData> = async (data) => {
-    try {
-      if (selectedEvent) {
-        const updatedEvent = await updateEvent(selectedEvent.id, data);
-        setEvents(
-          events.map((event) =>
-            event.id === selectedEvent.id ? updatedEvent : event
-          )
-        );
-        setSelectedEvent(null);
-      }
-    } catch (error) {
-      console.log("Error occurred while handle update event ", error);
-    }
-  };
-
-  const handleDeleteEvent = async (id: number) => {
-    try {
-      await deleteEvent(id);
-      setEvents(events.filter((event) => event.id !== id));
-    } catch (error) {
-      console.log("Error occurred while handle delete event ", error);
-    }
-  };
-
-  const handleJoinEvent = async (id: number) => {
-    try {
-      const updatedEvent = await joinEvent(id);
-      setEvents(
-        events.map((event) =>
-          event.id === updatedEvent.id ? updatedEvent : event
-        )
-      );
-    } catch (error) {
-      console.log(`Error occurred while joining to event`, error);
-    }
-  };
-
-  return (
+  return isEventCreated ? (
+    <EventsListPage events={events} setEvents={setEvents} isRightSidebarOpen={isRightSidebarOpen}/>
+  ) : (
     <div
       className={
         isRightSidebarOpen
@@ -80,25 +43,73 @@ const EventPage = ({ isRightSidebarOpen }: EventProps) => {
       }
     >
       <h1>Create New Event</h1>
-      <EventForm
-        onSubmit={selectedEvent ? handleUpdateEvent : handleCreateEvent}
-      />
-      {/* <h2>Upcoming Events</h2>
-      <ul>
-        {events.map((event) => (
-          <li key={event.id}>
-            <h3>{event.title}</h3>
-            <p>{event.description}</p>
-            <p>{formatDate(event.date)}</p>
-            <p>{event.location}</p>
-            <p>Volunteers Needed {event.volunteersNeeded}</p>
-            <p>Volunteers Signed Up {event.volunteersSignedUp}</p>
-            <button onClick={() => handleJoinEvent(event.id)}>Join</button>
-            <button onClick={() => setSelectedEvent(event)}>Edit</button>
-            <button onClick={() => handleDeleteEvent(event.id)}>Delete</button>
-          </li>
-        ))}
-      </ul> */}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          <label htmlFor="title">Title</label>
+          <input
+            type="text"
+            id="title"
+            maxLength={50}
+            {...register("title", { required: "Title is required" })}
+            placeholder="Max. 50 characters"
+          />
+          {errors.title && <p className="error">{errors.title.message}</p>}
+        </div>
+        <div>
+          <label htmlFor="description">Description</label>
+          <input
+            type="text"
+            id="description"
+            {...register("description", { required: true })}
+          />
+          {errors.description && (
+            <p className="error">{errors.description.message}</p>
+          )}
+        </div>
+        <div>
+          <label htmlFor="date">Date</label>
+          <input
+            type="datetime-local"
+            id="date"
+            {...register("date", { required: "Date is required" })}
+          />
+          {errors.date && <p className="error">{errors.date.message}</p>}
+        </div>
+        <div>
+          <label htmlFor="location">Location</label>
+          <input
+            type="text"
+            id="location"
+            maxLength={50}
+            {...register("location", { required: "Location is required" })}
+            placeholder="Coordinates or place"
+          />
+          {errors.location && (
+            <p className="error">{errors.location.message}</p>
+          )}
+        </div>
+        <div>
+          <label htmlFor="volunteersNeeded">Volunteers Needed</label>
+          <input
+            type="number"
+            id="volunteersNeeded"
+            {...register("volunteersNeeded", {
+              required: "Number is required",
+            })}
+            placeholder="2"
+            min={1}
+            max={100}
+          />
+          {errors.volunteersNeeded && (
+            <p className="error">{errors.volunteersNeeded.message}</p>
+          )}
+        </div>
+        <div className="button-container ">
+          <button type="submit" id="event-button" disabled={isLoading}>
+            {isLoading ? "Loading..." : "Create Event"}
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

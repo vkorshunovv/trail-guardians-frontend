@@ -8,7 +8,7 @@ import LoginPage from "./LoginPage";
 import Modal from "../components/Modal";
 import { useState } from "react";
 import ReportPage from "./ReportPage";
-import { ReportData } from "../constants";
+import { ReportData, EventData } from "../constants";
 import { useForm } from "react-hook-form";
 import EventPage from "./EventPage";
 
@@ -18,16 +18,25 @@ const HomePage = () => {
   const [isRegistered, setRegistered] = useState(false);
   const [isLogin, setLogin] = useState(false);
   const [reports, setReports] = useState<ReportData[]>([]);
+  const [events, setEvents] = useState<EventData[]>([]);
   const [isLeftSidebarOpen, setLeftSidebarOpen] = useState(false);
   const [isRightSidebarOpen, setRightSidebarOpen] = useState(false);
+  const [isEventCreated, setEventCreated] = useState(false);
 
   const {
-    register,
-    handleSubmit,
-    reset,
-    setValue,
-    formState: { errors },
+    register: registerReport,
+    handleSubmit: handleSubmitReport,
+    reset: resetReport,
+    setValue: setValueReport,
+    formState: { errors: reportErrors },
   } = useForm<ReportData>();
+
+  const {
+    register: registerEvent,
+    handleSubmit: handleSubmitEvent,
+    reset: resetEvent,
+    formState: { errors: eventErrors },
+  } = useForm<EventData>();
 
   return (
     <div className="homepage-container">
@@ -38,10 +47,10 @@ const HomePage = () => {
         <ReportPage
           isLeftSidebarOpen={isLeftSidebarOpen}
           setReports={setReports}
-          register={register}
-          handleSubmit={handleSubmit}
-          reset={reset}
-          errors={errors}
+          register={registerReport}
+          handleSubmit={handleSubmitReport}
+          reset={resetReport}
+          errors={reportErrors}
         />
       </section>
 
@@ -71,7 +80,7 @@ const HomePage = () => {
             <MapComponent
               reports={reports}
               setReports={setReports}
-              setValue={setValue}
+              setValue={setValueReport}
             />
           </main>
         </div>
@@ -82,7 +91,17 @@ const HomePage = () => {
         <button className="pull-btn" onClick={() => setRightSidebarOpen(true)}>
           Click to open
         </button>
-        <EventPage isRightSidebarOpen={isRightSidebarOpen} />
+        <EventPage
+          isRightSidebarOpen={isRightSidebarOpen}
+          events={events}
+          setEvents={setEvents}
+          register={registerEvent}
+          handleSubmit={handleSubmitEvent}
+          reset={resetEvent}
+          errors={eventErrors}
+          setEventCreated={setEventCreated}
+          isEventCreated={isEventCreated}
+        />
       </section>
     </div>
   );

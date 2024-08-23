@@ -3,7 +3,6 @@ import {
   FieldErrors,
   UseFormHandleSubmit,
   UseFormSetValue,
-  SubmitHandler,
 } from "react-hook-form";
 import * as Yup from "yup";
 
@@ -63,7 +62,7 @@ export interface ReportProps {
   register: UseFormRegister<ReportData>;
   handleSubmit: UseFormHandleSubmit<ReportData>;
   reset: () => void;
-  errors: FieldErrors<ReportData>;
+  reportErrors: FieldErrors<ReportData>;
   isLeftSidebarOpen: boolean;
 }
 
@@ -87,8 +86,9 @@ export interface EventProps {
   isRightSidebarOpen: boolean;
 }
 
-export interface EventFormProps {
-  onSubmit: SubmitHandler<EventData>;
+export interface EventsListProps {
+ events: EventData[];
+ setEvents: React.Dispatch<React.SetStateAction<EventData[]>>;
 }
 
 export interface MetricsData {

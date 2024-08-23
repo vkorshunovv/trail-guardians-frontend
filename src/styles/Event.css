@@ -6,17 +6,17 @@
     transition: box-shadow .2s ease;
     position: fixed;
     right: -260px;
+
 }
 
-.event:hover {
+.event:hover,
+.events-list:hover {
     box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.069);
-
 }
 
 .button-container #event-button {
     width: 15vw;
     background-color: rgb(76, 15, 15);
-  
 }
 
 .button-container #event-button:hover {
@@ -25,8 +25,86 @@
 }
 
 .right-sidebar-open {
-    transition: all .7s ease;
+    transition: all .6s ease;
     right: 0;
+
+}
+
+.events-list {
+    margin-bottom: 4rem;
+    border-radius: 1.5rem 0 0 1.5rem;
+    background-color: rgb(56, 133, 138);
+    flex-wrap: nowrap;
+    transition: box-shadow .2s ease;
+    position: fixed;
+    max-height: 500px;
+    max-width: 270px;
+
+}
+
+.events-list .list-container {
+    overflow-y: scroll;
+    width: 100%;
+    display: block;
+    font-size: 1vw;
+}
+
+.events-list .list-container ul {
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+    align-items: flex-start;
+    margin: 0;
+    padding: 1rem;
+}
+
+.list-container li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    list-style: none;
+    border: 1px solid white;
+    border-radius: 1rem;
+    /* padding: .5rem; */
+    background-color: rgb(81, 138, 88);
+    width: 100%;
+}
+
+.list-container li p {
+    margin: .8vh;
+}
+
+.list-container li span {
+    font-size: 1.2vw;
+}
+
+.list-container li:hover {
+    background-color: rgb(60, 104, 65);
+}
+
+.list-container li h3 {
+    padding: .5vw;
+    font-style: italic;
+    font-family: "Quicksand", sans-serif;
+}
+
+.button-container {
+    width: 100%;
+}
+
+.button-container .join-btn {
+    width: 10vw;
+    background-color: #fff;
+}
+
+.button-container .join-btn:hover {
+    background-color: rgb(112 169 119);
+    color: #fff;
+}
+
+
+.button-container .join-btn {
+    color: rgb(60, 104, 65)
 }
 
 /*TODO think about bundling styles with the same report styles
