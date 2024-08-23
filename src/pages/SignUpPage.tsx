@@ -8,7 +8,11 @@ import {
 } from "../constants";
 import { signUp } from "../services/authService";
 
-const SignUpPage = ({ setModalOpen, setRegistered }: SignUpProps) => {
+const SignUpPage = ({
+  setModalOpen,
+  setRegistered,
+  setUserName,
+}: SignUpProps) => {
   const handleSubmit = async (
     values: FormValues,
     { setSubmitting, resetForm }: FormikHelpers<FormValues>
@@ -24,6 +28,7 @@ const SignUpPage = ({ setModalOpen, setRegistered }: SignUpProps) => {
       setRegistered(true);
       setModalOpen(false);
       setSubmitting(false);
+      setUserName(values.name!);
     } catch (error) {
       console.log(
         `Error occurred while submitting signup form: ${

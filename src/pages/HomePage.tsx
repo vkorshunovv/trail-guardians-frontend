@@ -11,6 +11,7 @@ import ReportPage from "./ReportPage";
 import { ReportData, EventData } from "../constants";
 import { useForm } from "react-hook-form";
 import EventPage from "./EventPage";
+import UserProfile from "../components/UserProfile";
 
 const HomePage = () => {
   const [isMapVisible, setMapVisible] = useState(false);
@@ -22,6 +23,7 @@ const HomePage = () => {
   const [isLeftSidebarOpen, setLeftSidebarOpen] = useState(false);
   const [isRightSidebarOpen, setRightSidebarOpen] = useState(true);
   const [isEventCreated, setEventCreated] = useState(true);
+  const [userName, setUserName] = useState("");
 
   const {
     register: registerReport,
@@ -61,12 +63,15 @@ const HomePage = () => {
           isLogin={isLogin}
         />
         <Modal isOpen={isModalOpen} onRequestClose={() => setModalOpen(false)}>
-          {isRegistered ? (
+          {isLogin ? (
+            <UserProfile userName={userName} setLogin={setLogin}/>
+          ) : isRegistered ? (
             <LoginPage setLogin={setLogin} setModalOpen={setModalOpen} />
           ) : (
             <SignUpPage
               setModalOpen={setModalOpen}
               setRegistered={setRegistered}
+              setUserName={setUserName}
             />
           )}
 

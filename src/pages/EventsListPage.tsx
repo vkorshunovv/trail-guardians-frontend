@@ -69,8 +69,16 @@ const EventsListPage = ({
                   Join
                 </button>
               </div>
-              {/* <button onClick={() => setSelectedEvent(event)}>Edit</button> */}
-              {/* <button onClick={() => handleDeleteEvent(event.id)}>Delete</button> */}
+
+              {/* { isSelectedEvent &&
+                <>
+                  
+                  <button onClick={() => setSelectedEvent(event)}>Edit</button>
+                  <button onClick={() => handleDeleteEvent(event.id)}>
+                    Delete
+                  </button>
+                </>
+              } */}
             </li>
           ))}
         </ul>{" "}

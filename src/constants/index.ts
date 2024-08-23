@@ -125,9 +125,15 @@ export interface HeaderProps {
 export interface SignUpProps {
   setModalOpen: (openned: boolean) => void;
   setRegistered: (registerred: boolean) => void;
+  setUserName: (user: string) => void;
 }
 
 export interface LoginProps {
   setModalOpen: (openned: boolean) => void;
+  setLogin: (loggedin: boolean) => void;
+}
+
+export interface UserProfileProps {
+  userName: string;
   setLogin: (loggedin: boolean) => void;
 }
