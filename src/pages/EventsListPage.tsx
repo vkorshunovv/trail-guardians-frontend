@@ -11,7 +11,7 @@ const EventsListPage = ({
   useEffect(() => {
     const fetchEvents = async () => {
       const fetchedEvents = await getEvents();
-      setEvents(fetchedEvents);
+      setEvents(fetchedEvents.reverse());
     };
     fetchEvents();
   }, []);
@@ -55,8 +55,12 @@ const EventsListPage = ({
               {/* <p>{event.description}</p> */}
               <p>📆 {formatDate(event.date)}</p>
               <p>📍 {event.location}</p>
-              <p>🪵 Volunteers Needed: <span>{event.volunteersNeeded}</span></p>
-              <p>💪 Volunteers Joined: <span>{event.volunteersSignedUp}</span></p>
+              <p>
+                🪵 Volunteers Needed: <span>{event.volunteersNeeded}</span>
+              </p>
+              <p>
+                💪 Volunteers Joined: <span>{event.volunteersSignedUp}</span>
+              </p>
               <div className="button-container">
                 <button
                   onClick={() => handleJoinEvent(event.id)}
@@ -65,8 +69,8 @@ const EventsListPage = ({
                   Join
                 </button>
               </div>
-              {/* <button onClick={() => setSelectedEvent(event)}>Edit</button>
-            <button onClick={() => handleDeleteEvent(event.id)}>Delete</button> */}
+              {/* <button onClick={() => setSelectedEvent(event)}>Edit</button> */}
+              {/* <button onClick={() => handleDeleteEvent(event.id)}>Delete</button> */}
             </li>
           ))}
         </ul>{" "}

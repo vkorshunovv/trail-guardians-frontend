@@ -33,7 +33,11 @@ const EventPage = ({
   };
 
   return isEventCreated ? (
-    <EventsListPage events={events} setEvents={setEvents} isRightSidebarOpen={isRightSidebarOpen}/>
+    <EventsListPage
+      events={events}
+      setEvents={setEvents}
+      isRightSidebarOpen={isRightSidebarOpen}
+    />
   ) : (
     <div
       className={

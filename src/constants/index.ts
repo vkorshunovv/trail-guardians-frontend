@@ -62,7 +62,7 @@ export interface ReportProps {
   register: UseFormRegister<ReportData>;
   handleSubmit: UseFormHandleSubmit<ReportData>;
   reset: () => void;
-  reportErrors: FieldErrors<ReportData>;
+  errors: FieldErrors<ReportData>;
   isLeftSidebarOpen: boolean;
 }
 
@@ -83,12 +83,21 @@ export interface EventData {
 }
 
 export interface EventProps {
+  events: EventData[];
+  setEvents: React.Dispatch<React.SetStateAction<EventData[]>>;
+  register: UseFormRegister<EventData>;
+  handleSubmit: UseFormHandleSubmit<EventData>;
+  reset: () => void;
+  errors: FieldErrors<EventData>;
   isRightSidebarOpen: boolean;
+  setEventCreated: (created: boolean) => void;
+  isEventCreated: boolean;
 }
 
 export interface EventsListProps {
- events: EventData[];
- setEvents: React.Dispatch<React.SetStateAction<EventData[]>>;
+  events: EventData[];
+  setEvents: React.Dispatch<React.SetStateAction<EventData[]>>;
+  isRightSidebarOpen: boolean;
 }
 
 export interface MetricsData {

@@ -20,8 +20,8 @@ const HomePage = () => {
   const [reports, setReports] = useState<ReportData[]>([]);
   const [events, setEvents] = useState<EventData[]>([]);
   const [isLeftSidebarOpen, setLeftSidebarOpen] = useState(false);
-  const [isRightSidebarOpen, setRightSidebarOpen] = useState(false);
-  const [isEventCreated, setEventCreated] = useState(false);
+  const [isRightSidebarOpen, setRightSidebarOpen] = useState(true);
+  const [isEventCreated, setEventCreated] = useState(true);
 
   const {
     register: registerReport,
