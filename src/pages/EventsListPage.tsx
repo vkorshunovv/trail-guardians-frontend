@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { deleteEvent, getEvents, joinEvent } from "../services/eventService";
 import { formatDate } from "../utils/dateFormat";
 import { EventsListProps } from "../constants";
@@ -7,7 +7,15 @@ const EventsListPage = ({
   events,
   setEvents,
   isRightSidebarOpen,
+  setUserEvents,
 }: EventsListProps) => {
+  const [loadingStates, setLoadingStates] = useState<{
+    [key: number]: boolean;
+  }>({});
+  const [joinedStates, setJoinedStates] = useState<{
+    [key: number]: boolean;
+  }>({});
+
   useEffect(() => {
     const fetchEvents = async () => {
       const fetchedEvents = await getEvents();
@@ -18,14 +26,23 @@ const EventsListPage = ({
 
   const handleJoinEvent = async (id: number) => {
     try {
-      const updatedEvent = await joinEvent(id);
-      setEvents(
-        events.map((event) =>
-          event.id === updatedEvent.id ? updatedEvent : event
+      setLoadingStates((prev) => ({ ...prev, [id]: true }));
+      const joinedEvent = await joinEvent(id);
+      setUserEvents((prevEvent) => [...prevEvent, joinedEvent]);
+
+      setEvents((prevEvent) =>
+        prevEvent.map((event) =>
+          event.id === joinedEvent.id
+            ? { ...event, volunteersSignedUp: event.volunteersSignedUp! + 1 }
+            : event
         )
       );
+
+      setLoadingStates((prev) => ({ ...prev, [id]: false }));
+      setJoinedStates((prev) => ({ ...prev, [id]: true }));
     } catch (error) {
-      console.log(`Error occurred while joining to event`, error);
+      console.log(`Error occurred while joining the event`, error);
+      setLoadingStates((prev) => ({ ...prev, [id]: false }));
     }
   };
 
@@ -50,7 +67,14 @@ const EventsListPage = ({
       <div className="list-container">
         <ul>
           {events.map((event) => (
-            <li key={event.id}>
+            <li
+              key={event.id}
+              className={
+                event.volunteersSignedUp === event.volunteersNeeded
+                  ? "inactive"
+                  : ""
+              }
+            >
               <h3>👉 {event.title}</h3>
               {/* <p>{event.description}</p> */}
               <p>📆 {formatDate(event.date)}</p>
@@ -65,15 +89,20 @@ const EventsListPage = ({
                 <button
                   onClick={() => handleJoinEvent(event.id)}
                   className="join-btn"
+                  disabled={loadingStates[event.id] || joinedStates[event.id]}
                 >
-                  Join
+                  {joinedStates[event.id]
+                    ? "Joined 🤙"
+                    : loadingStates[event.id]
+                    ? "Loading..."
+                    : "Join"}
                 </button>
               </div>
 
               {/* { isSelectedEvent &&
                 <>
                   
-                  <button onClick={() => setSelectedEvent(event)}>Edit</button>
+                  <button onClick={() => setSelectedEvent(event.id)}>Edit</button>
                   <button onClick={() => handleDeleteEvent(event.id)}>
                     Delete
                   </button>

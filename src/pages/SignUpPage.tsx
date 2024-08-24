@@ -40,6 +40,11 @@ const SignUpPage = ({
     }
   };
 
+  const handleLoginRedirection = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setRegistered(true);
+  };
+
   return (
     <div className="form-container">
       <h1>Please Sign Up as a New Trail Guardian</h1>
@@ -87,9 +92,15 @@ const SignUpPage = ({
                 className={errors.confirmPassword ? "error" : ""}
               />
             </div>
-            <div className="button-container">
+            <div className="button-container" id="signup-btn-container">
               <button type="submit" disabled={isSubmitting}>
                 {isSubmitting ? "Loading..." : "Sign up"}
+              </button>
+              <button
+                className="loginBtn"
+                onClick={(e) => handleLoginRedirection(e)} // Change this logic to localStorage, so it automatically know if you loged in
+              >
+                Log in
               </button>
             </div>
           </form>

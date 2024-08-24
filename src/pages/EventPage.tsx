@@ -15,6 +15,7 @@ const EventPage = ({
   errors,
   setEventCreated,
   isEventCreated,
+  setUserEvents
 }: EventProps) => {
   const [isLoading, setLoading] = useState(false);
 
@@ -37,6 +38,7 @@ const EventPage = ({
       events={events}
       setEvents={setEvents}
       isRightSidebarOpen={isRightSidebarOpen}
+      setUserEvents={setUserEvents}
     />
   ) : (
     <div

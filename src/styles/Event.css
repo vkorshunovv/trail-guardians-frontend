@@ -78,14 +78,14 @@
     font-size: 1.2vw;
 }
 
-/* .list-container li:hover {
-    background-color: rgb(60, 104, 65);
-} */
-
 .list-container li h3 {
     padding: .5vw;
     font-style: italic;
     font-family: "Quicksand", sans-serif;
+}
+
+.inactive {
+    opacity: .7;
 }
 
 .button-container {
