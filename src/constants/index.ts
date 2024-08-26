@@ -45,11 +45,6 @@ export interface FormValues {
   confirmPassword?: string;
 }
 
-export interface MapClickHandlerProps {
-  setMarker: (coords: { lat: number; lng: number }) => void;
-  setValue: UseFormSetValue<ReportData>;
-}
-
 export interface ReportData {
   id?: number;
   description: string;

@@ -83,6 +83,10 @@ form {
     font-size: 1.2rem;
 }
 
+.button-container .logout-btn {
+    background-color: rgb(186, 73, 73);
+}
+
 .button-container button:hover {
     transition: all .3s ease;
     background-color: rgb(255, 255, 255);

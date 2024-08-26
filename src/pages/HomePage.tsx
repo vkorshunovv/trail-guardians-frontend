@@ -94,8 +94,6 @@ const HomePage = () => {
               setUserName={setUserName}
             />
           )}
-
-          {/* <LoginPage setLogin={setLogin} setModalOpen={setModalOpen} /> */}
         </Modal>
         <div className={`flip-card ${isMapVisible && "flipped"}`}>
           <div className="flip-card-front">

@@ -21,7 +21,7 @@ const UserProfile = ({ userName, setLogin, userEvents }: UserProfileProps) => {
         ))}
       </ul>
       <div className="button-container">
-        <button onClick={handleLogOut}>Log out</button>
+        <button onClick={handleLogOut} className="logout-btn">Log out</button>
       </div>
     </div>
   );

@@ -1,15 +1,20 @@
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMapEvents,
+} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "../styles/Map.css";
 import { useEffect, useState } from "react";
 import { MapComponentProps, Center, TileLayerAttr } from "../constants";
 import { getReports } from "../services/reportService";
-import { LatLngExpression } from "leaflet";
-import MapClickHandler from "./MapClickHandler";
+import { LatLngExpression, LatLngLiteral } from "leaflet";
 import catImage from "../assets/cat-8943928_640.png";
 
 const MapComponent = ({ reports, setReports, setValue }: MapComponentProps) => {
-  const [marker, setMarker] = useState<LatLngExpression>(Center);
+  const [marker, setMarker] = useState<LatLngLiteral>(Center);
   const [notification, setNotification] = useState<string | null>(null);
 
   useEffect(() => {
@@ -23,13 +28,25 @@ const MapComponent = ({ reports, setReports, setValue }: MapComponentProps) => {
     };
     fetchReports();
   }, [setReports]);
+
+  const MapClickHandler = () => {
+    useMapEvents({
+      click(e) {
+        const coords = e.latlng;
+        setMarker(coords);
+        setValue("coordinates", `${coords.lat}, ${coords.lng}`);
+      },
+    });
+    return null;
+  };
+
   return (
     <MapContainer id="report-map" zoom={7} center={Center}>
       <TileLayer
         url={TileLayerAttr.url}
         attribution={TileLayerAttr.attribution}
       />
-      <MapClickHandler setMarker={setMarker} setValue={setValue} />
+      <MapClickHandler />
       {reports &&
         reports.length > 0 &&
         reports.map((report) => {
@@ -49,38 +66,36 @@ const MapComponent = ({ reports, setReports, setValue }: MapComponentProps) => {
             <Marker key={report.id} position={position}>
               <Popup>
                 {notification && (
-                  <div className="notification">{notification}</div>
+                  <div className="notification-popup">{notification}</div>
                 )}
-                <p>
-                  <span style={{ fontWeight: "bold" }}>Issue: </span> <br />
-                  {report.description}
-                </p>
-                <p
-                  onClick={() => handleCopyCoords(report.coordinates)}
-                  style={{ cursor: "pointer" }}
-                >
-                  <span style={{ fontWeight: "bold", cursor: "pointer" }}>
-                    GPS coordinates:
-                  </span>{" "}
-                  <br />
-                  {report.coordinates}
-                </p>
-                <img
-                  src={catImage} // TODO fix image display in popup from database
-                  alt={report.description}
-                  style={{
-                    maxWidth: "100px",
-                    height: "auto",
-                    borderRadius: "10px",
-                  }}
-                />
+                <div className="popup-wrapper">
+                  <p>
+                    <span>Issue: </span> <br />
+                    {report.description}
+                  </p>
+                  <p
+                    onClick={() => handleCopyCoords(report.coordinates)}
+                    className="popup-coords"
+                  >
+                    <span>GPS coordinates:</span> <br />
+                    {report.coordinates}
+                  </p>
+                  <img
+                    src={catImage} // TODO fix image display in popup from database
+                    alt={report.description}
+                  />
+                </div>
               </Popup>
             </Marker>
           );
         })}
-      {/* TODO popup GPS coordinates */}
       <Marker position={marker}>
-        <Popup>GPS Coordinates:</Popup>
+        <Popup>
+          <div className="popup-marker-coords">
+            <p>GPS Coordinates:</p>
+            <p> {[marker.lat, marker.lng]}</p>
+          </div>
+        </Popup>
       </Marker>
     </MapContainer>
   );

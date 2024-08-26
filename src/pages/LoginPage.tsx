@@ -23,7 +23,7 @@ const LoginPage = ({ setLogin, setModalOpen, setUserName }: LoginProps) => {
   ) => {
     try {
       const response = await logIn(values.email, values.password);
-      console.log("Login successful ", response.name);
+      console.log("Login successful ", response);
       setLogin(true);
       setModalOpen(false);
       setUserName(response.name);
