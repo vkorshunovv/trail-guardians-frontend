@@ -66,40 +66,43 @@ const EventsListPage = ({
       <h1>Upcoming Events</h1>
       <div className="list-container">
         <ul>
-          {events.map((event) => (
-            <li
-              key={event.id}
-              className={
-                event.volunteersSignedUp === event.volunteersNeeded
-                  ? "inactive"
-                  : ""
-              }
-            >
-              <h3>👉 {event.title}</h3>
-              {/* <p>{event.description}</p> */}
-              <p>📆 {formatDate(event.date)}</p>
-              <p>📍 {event.location}</p>
-              <p>
-                🪵 Volunteers Needed: <span>{event.volunteersNeeded}</span>
-              </p>
-              <p>
-                💪 Volunteers Joined: <span>{event.volunteersSignedUp}</span>
-              </p>
-              <div className="button-container">
-                <button
-                  onClick={() => handleJoinEvent(event.id)}
-                  className="join-btn"
-                  disabled={loadingStates[event.id] || joinedStates[event.id]}
-                >
-                  {joinedStates[event.id]
-                    ? "Joined 🤙"
-                    : loadingStates[event.id]
-                    ? "Loading..."
-                    : "Join"}
-                </button>
-              </div>
-
-              {/* { isSelectedEvent &&
+          {events.map((event) => {
+            const isVolunteersEnough =
+              event.volunteersSignedUp === event.volunteersNeeded;
+            return (
+              <li
+                key={event.id}
+                className={isVolunteersEnough ? "inactive" : ""}
+              >
+                <h3>👉 {event.title}</h3>
+                {/* <p>{event.description}</p> */}
+                <p>📆 {formatDate(event.date)}</p>
+                <p>📍 {event.location}</p>{" "}
+                {/* allow only place NOT coordinates */}
+                <p>
+                  🪵 Volunteers Needed: <span>{event.volunteersNeeded}</span>
+                </p>
+                <p>
+                  💪 Volunteers Joined: <span>{event.volunteersSignedUp}</span>
+                </p>
+                <div className="button-container">
+                  <button
+                    onClick={() => handleJoinEvent(event.id)}
+                    className="join-btn"
+                    disabled={
+                      loadingStates[event.id] ||
+                      joinedStates[event.id] ||
+                      isVolunteersEnough
+                    }
+                  >
+                    {joinedStates[event.id]
+                      ? "Joined 🤙"
+                      : loadingStates[event.id]
+                      ? "Loading..."
+                      : "Join"}
+                  </button>
+                </div>
+                {/* { isSelectedEvent &&
                 <>
                   
                   <button onClick={() => setSelectedEvent(event.id)}>Edit</button>
@@ -108,8 +111,9 @@ const EventsListPage = ({
                   </button>
                 </>
               } */}
-            </li>
-          ))}
+              </li>
+            );
+          })}
         </ul>{" "}
       </div>
     </div>

@@ -4,7 +4,7 @@ import "../styles/Form.css";
 import { FormValues, LoginProps } from "../constants";
 import { logIn } from "../services/authService";
 
-const LoginPage = ({ setLogin, setModalOpen }: LoginProps) => {
+const LoginPage = ({ setLogin, setModalOpen, setUserName }: LoginProps) => {
   const initialValues: FormValues = {
     email: "",
     password: "",
@@ -23,19 +23,20 @@ const LoginPage = ({ setLogin, setModalOpen }: LoginProps) => {
   ) => {
     try {
       const response = await logIn(values.email, values.password);
-      console.log("Login successful", " ", response);
-      resetForm();
+      console.log("Login successful ", response.name);
       setLogin(true);
       setModalOpen(false);
-      setSubmitting(false);
+      setUserName(response.name);
+      resetForm();
     } catch (error) {
+      //TODO popup message with following error on the screen
       console.log(
         `Error occurred while submitting login form: ${
           (error as Error).message
         }`
       );
+    } finally {
       setSubmitting(false);
-      //TODO popup message with following error on the screen
     }
   };
 

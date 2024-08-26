@@ -2,6 +2,12 @@ import { UserProfileProps } from "../constants";
 import { formatDate } from "../utils/dateFormat";
 
 const UserProfile = ({ userName, setLogin, userEvents }: UserProfileProps) => {
+  const handleLogOut = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    setLogin(false);
+  };
+
   return (
     <div>
       <p>Hello, {userName} 👋</p>
@@ -15,7 +21,7 @@ const UserProfile = ({ userName, setLogin, userEvents }: UserProfileProps) => {
         ))}
       </ul>
       <div className="button-container">
-        <button onClick={() => setLogin(false)}>Log out</button>
+        <button onClick={handleLogOut}>Log out</button>
       </div>
     </div>
   );

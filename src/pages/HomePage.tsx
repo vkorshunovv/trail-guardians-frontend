@@ -6,7 +6,7 @@ import GreetingCard from "../components/GreetingCard";
 import SignUpPage from "./SignUpPage";
 import LoginPage from "./LoginPage";
 import Modal from "../components/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReportPage from "./ReportPage";
 import { ReportData, EventData, JoinData } from "../constants";
 import { useForm } from "react-hook-form";
@@ -41,6 +41,17 @@ const HomePage = () => {
     formState: { errors: eventErrors },
   } = useForm<EventData>();
 
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    const storedUser = localStorage.getItem("user");
+
+    if (storedToken && storedUser) {
+      setLogin(true);
+      const parsedUser = JSON.parse(storedUser);
+      setUserName(parsedUser.name);
+    }
+  }, []);
+
   return (
     <div className="homepage-container">
       <section className="left-sidebar">
@@ -71,7 +82,11 @@ const HomePage = () => {
               userEvents={userEvents}
             />
           ) : isRegistered ? (
-            <LoginPage setLogin={setLogin} setModalOpen={setModalOpen} />
+            <LoginPage
+              setLogin={setLogin}
+              setModalOpen={setModalOpen}
+              setUserName={setUserName}
+            />
           ) : (
             <SignUpPage
               setModalOpen={setModalOpen}

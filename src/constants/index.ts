@@ -90,7 +90,7 @@ export interface EventProps {
   reset: () => void;
   errors: FieldErrors<EventData>;
   isRightSidebarOpen: boolean;
-  setEventCreated: (created: boolean) => void;
+  setEventCreated: (isEventCreated: boolean) => void;
   isEventCreated: boolean;
   setUserEvents: React.Dispatch<React.SetStateAction<JoinData[]>>;
 }
@@ -109,7 +109,7 @@ export interface MetricsData {
 }
 
 export interface GreetingCardProps {
-  setMapVisible: (flipped: boolean) => void;
+  setMapVisible: (isMapVisible: boolean) => void;
 }
 
 export interface ModalProps {
@@ -119,25 +119,26 @@ export interface ModalProps {
 }
 
 export interface HeaderProps {
-  setModalOpen: (openned: boolean) => void;
+  setModalOpen: (isOpen: boolean) => void;
   isRegistered: boolean;
   isLogin: boolean;
 }
 
 export interface SignUpProps {
-  setModalOpen: (openned: boolean) => void;
-  setRegistered: (registerred: boolean) => void;
+  setModalOpen: (isOpen: boolean) => void;
+  setRegistered: (isRegistered: boolean) => void;
   setUserName: (user: string) => void;
 }
 
 export interface LoginProps {
-  setModalOpen: (openned: boolean) => void;
-  setLogin: (loggedin: boolean) => void;
+  setModalOpen: (isOpen: boolean) => void;
+  setLogin: (isLogin: boolean) => void;
+  setUserName: (user: string) => void;
 }
 
 export interface UserProfileProps {
   userName: string;
-  setLogin: (loggedin: boolean) => void;
+  setLogin: (isLogin: boolean) => void;
   userEvents: JoinData[];
 }
 

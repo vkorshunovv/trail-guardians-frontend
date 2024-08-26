@@ -23,7 +23,12 @@ export const signUp = async (name: string, email: string, password: string) => {
 export const logIn = async (email: string, password: string) => {
   try {
     const response = await axios.post(`${API_URL}/login`, { email, password });
-    return response.data;
+    const { token, user } = response.data;
+
+    localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(user));
+
+    return user;
   } catch (error) {
     console.log(
       "Error occurs while call login API: ",
