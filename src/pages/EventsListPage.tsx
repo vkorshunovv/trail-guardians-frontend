@@ -21,6 +21,7 @@ const EventsListPage = ({
     const fetchEvents = async () => {
       const fetchedEvents = await getEvents();
       setEvents(fetchedEvents.reverse());
+      //TODO sort by title number
     };
     fetchEvents();
   }, []);
@@ -31,18 +32,30 @@ const EventsListPage = ({
         setLoadingStates((prev) => ({ ...prev, [eventId]: true }));
 
         const user = JSON.parse(localStorage.getItem("user") || "{}");
-        const response = await joinEvent(user.id, eventId);
-        console.log("Joined Events from API: ", response);
-
-        setUserEvents(response);
-        setJoinedStates((prev) => ({ ...prev, [eventId]: true }));
-        setEvents((prevEvents) =>
-          prevEvents.map((event) =>
-            event.id === eventId
-              ? { ...event, volunteersSignedUp: event.volunteersSignedUp! + 1 }
-              : event
-          )
+        const { joinedEvents, updatedEvent } = await joinEvent(
+          user.id,
+          eventId
         );
+
+        if (joinedEvents && updatedEvent) {
+          console.log("Joined Events from API: ", joinedEvents);
+          console.log("Updated event from API: ", updatedEvent);
+
+          setUserEvents(joinedEvents);
+
+          setEvents((prevEvents) =>
+            prevEvents.map((event) =>
+              event.id === updatedEvent.id ? updatedEvent : event
+            )
+          );
+
+          setJoinedStates((prev) => ({ ...prev, [eventId]: true }));
+        } else {
+          console.warn("Unexpected API response: ", {
+            joinedEvents,
+            updatedEvent,
+          });
+        }
 
         setLoadingStates((prev) => ({ ...prev, [eventId]: false }));
       } else {
@@ -105,15 +118,6 @@ const EventsListPage = ({
                       : "Join"}
                   </button>
                 </div>
-                {/* { isSelectedEvent &&
-                <>
-                  
-                  <button onClick={() => setSelectedEvent(event.id)}>Edit</button>
-                  <button onClick={() => handleDeleteEvent(event.id)}>
-                    Delete
-                  </button>
-                </>
-              } */}
               </li>
             );
           })}

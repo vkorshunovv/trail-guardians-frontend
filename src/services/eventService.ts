@@ -36,14 +36,14 @@ export const joinEvent = async (userId: number, eventId: number) => {
       }
     );
 
-    const { joinedEvents } = response.data;
+    const { joinedEvents, updatedEvent } = response.data;
 
     const user = JSON.parse(localStorage.getItem("user") || "{}");
     user.joinedEvents.push(joinedEvents);
     localStorage.setItem("user", JSON.stringify(user));
-    console.log("server returns final joinedEvents: ", user.joinedEvents);
+    console.log("server returns final joinedEvents: ", joinedEvents, updatedEvent);
 
-    return user.joinedEvents;
+    return {joinedEvents, updatedEvent};
   } catch (error) {
     console.error("Error occurred while joining event:", error);
     throw error;
