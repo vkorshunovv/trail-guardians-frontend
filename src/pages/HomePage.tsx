@@ -8,23 +8,23 @@ import LoginPage from "./LoginPage";
 import Modal from "../components/Modal";
 import { useEffect, useState } from "react";
 import ReportPage from "./ReportPage";
-import { ReportData, EventData, JoinData } from "../constants";
+import { ReportData, EventData } from "../constants";
 import { useForm } from "react-hook-form";
 import EventPage from "./EventPage";
 import UserProfile from "../components/UserProfile";
 
 const HomePage = () => {
-  const [isMapVisible, setMapVisible] = useState(false);
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [isRegistered, setRegistered] = useState(false);
-  const [isLogin, setLogin] = useState(false);
+  const [isMapVisible, setMapVisible] = useState<boolean>(false);
+  const [isModalOpen, setModalOpen] = useState<boolean>(false);
+  const [isRegistered, setRegistered] = useState<boolean>(false);
+  const [isLogin, setLogin] = useState<boolean>(false);
   const [reports, setReports] = useState<ReportData[]>([]);
   const [events, setEvents] = useState<EventData[]>([]);
-  const [isLeftSidebarOpen, setLeftSidebarOpen] = useState(false);
-  const [isRightSidebarOpen, setRightSidebarOpen] = useState(true);
-  const [isEventCreated, setEventCreated] = useState(true);
+  const [isLeftSidebarOpen, setLeftSidebarOpen] = useState<boolean>(false);
+  const [isRightSidebarOpen, setRightSidebarOpen] = useState<boolean>(true);
+  const [isEventCreated, setEventCreated] = useState<boolean>(true);
   const [userName, setUserName] = useState("");
-  const [userEvents, setUserEvents] = useState<JoinData[]>([]);
+  const [userEvents, setUserEvents] = useState<any[]>([]);
 
   const {
     register: registerReport,
@@ -86,6 +86,7 @@ const HomePage = () => {
               setLogin={setLogin}
               setModalOpen={setModalOpen}
               setUserName={setUserName}
+              setUserEvents={setUserEvents}
             />
           ) : (
             <SignUpPage
@@ -125,6 +126,7 @@ const HomePage = () => {
           setEventCreated={setEventCreated}
           isEventCreated={isEventCreated}
           setUserEvents={setUserEvents}
+          isLogin={isLogin}
         />
       </section>
     </div>

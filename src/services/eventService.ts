@@ -21,32 +21,31 @@ export const createEvent = async (event: EventData) => {
   return response.data;
 };
 
-export const updateEvent = async (id: number, event: EventData) => {
-  const response = await axios.put(`${API_URL}/${id}`, event, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
-  return response.data;
-};
-
-export const deleteEvent = async (id: number) => {
-  await axios.delete(`${API_URL}/${id}`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
-};
-
-export const joinEvent = async (id: number) => {
-  const response = await axios.put(
-    `${API_URL}/${id}/join`,
-    {},
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+export const joinEvent = async (userId: number, eventId: number) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/joinEvent`,
+      {
+        userId,
+        eventId,
       },
-    }
-  );
-  return response.data;
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+
+    const { joinedEvents } = response.data;
+
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    user.joinedEvents.push(joinedEvents);
+    localStorage.setItem("user", JSON.stringify(user));
+    console.log("server returns final joinedEvents: ", user.joinedEvents);
+
+    return user.joinedEvents;
+  } catch (error) {
+    console.error("Error occurred while joining event:", error);
+    throw error;
+  }
 };

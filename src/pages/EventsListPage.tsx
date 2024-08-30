@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { deleteEvent, getEvents, joinEvent } from "../services/eventService";
+import { getEvents, joinEvent } from "../services/eventService";
 import { formatDate } from "../utils/dateFormat";
 import { EventsListProps } from "../constants";
 
@@ -8,6 +8,7 @@ const EventsListPage = ({
   setEvents,
   isRightSidebarOpen,
   setUserEvents,
+  isLogin,
 }: EventsListProps) => {
   const [loadingStates, setLoadingStates] = useState<{
     [key: number]: boolean;
@@ -24,34 +25,33 @@ const EventsListPage = ({
     fetchEvents();
   }, []);
 
-  const handleJoinEvent = async (id: number) => {
+  const handleJoinEvent = async (eventId: number) => {
     try {
-      setLoadingStates((prev) => ({ ...prev, [id]: true }));
-      const joinedEvent = await joinEvent(id);
-      setUserEvents((prevEvent) => [...prevEvent, joinedEvent]);
+      if (isLogin) {
+        setLoadingStates((prev) => ({ ...prev, [eventId]: true }));
 
-      setEvents((prevEvent) =>
-        prevEvent.map((event) =>
-          event.id === joinedEvent.id
-            ? { ...event, volunteersSignedUp: event.volunteersSignedUp! + 1 }
-            : event
-        )
-      );
+        const user = JSON.parse(localStorage.getItem("user") || "{}");
+        const response = await joinEvent(user.id, eventId);
+        console.log("Joined Events from API: ", response);
 
-      setLoadingStates((prev) => ({ ...prev, [id]: false }));
-      setJoinedStates((prev) => ({ ...prev, [id]: true }));
+        setUserEvents(response);
+        setJoinedStates((prev) => ({ ...prev, [eventId]: true }));
+        setEvents((prevEvents) =>
+          prevEvents.map((event) =>
+            event.id === eventId
+              ? { ...event, volunteersSignedUp: event.volunteersSignedUp! + 1 }
+              : event
+          )
+        );
+
+        setLoadingStates((prev) => ({ ...prev, [eventId]: false }));
+      } else {
+        throw new Error("Please, log in to your account before joining events");
+        //TODO popup
+      }
     } catch (error) {
-      console.log(`Error occurred while joining the event`, error);
-      setLoadingStates((prev) => ({ ...prev, [id]: false }));
-    }
-  };
-
-  const handleDeleteEvent = async (id: number) => {
-    try {
-      await deleteEvent(id);
-      setEvents(events.filter((event) => event.id !== id));
-    } catch (error) {
-      console.log("Error occurred while handle delete event ", error);
+      console.error("Error occurred while joining the event", error);
+      setLoadingStates((prev) => ({ ...prev, [eventId]: false }));
     }
   };
 
@@ -74,11 +74,14 @@ const EventsListPage = ({
                 key={event.id}
                 className={isVolunteersEnough ? "inactive" : ""}
               >
-                <h3>👉 {event.title}</h3>
+                <h3>
+                  <span style={{ color: "rgb(112 169 119)" }}>#{event.id}</span>{" "}
+                  "{event.title}"
+                </h3>
                 {/* <p>{event.description}</p> */}
                 <p>📆 {formatDate(event.date)}</p>
                 <p>📍 {event.location}</p>{" "}
-                {/* allow only place NOT coordinates */}
+                {/* allow only place, NOT coordinates */}
                 <p>
                   🪵 Volunteers Needed: <span>{event.volunteersNeeded}</span>
                 </p>

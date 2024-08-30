@@ -4,7 +4,7 @@ import "../styles/Form.css";
 import { FormValues, LoginProps } from "../constants";
 import { logIn } from "../services/authService";
 
-const LoginPage = ({ setLogin, setModalOpen, setUserName }: LoginProps) => {
+const LoginPage = ({ setLogin, setModalOpen, setUserName, setUserEvents }: LoginProps) => {
   const initialValues: FormValues = {
     email: "",
     password: "",
@@ -24,6 +24,10 @@ const LoginPage = ({ setLogin, setModalOpen, setUserName }: LoginProps) => {
     try {
       const response = await logIn(values.email, values.password);
       console.log("Login successful ", response);
+
+      const userJoinedEvents = JSON.parse(localStorage.getItem('user') || '{}')
+      setUserEvents(userJoinedEvents.joinedEvents)
+
       setLogin(true);
       setModalOpen(false);
       setUserName(response.name);

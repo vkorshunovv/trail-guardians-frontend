@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { MapComponentProps, Center, TileLayerAttr } from "../constants";
 import { getReports } from "../services/reportService";
 import { LatLngExpression, LatLngLiteral } from "leaflet";
-import catImage from "../assets/cat-8943928_640.png";
+import catImage from "../assets/cat-test.png";
 
 const MapComponent = ({ reports, setReports, setValue }: MapComponentProps) => {
   const [marker, setMarker] = useState<LatLngLiteral>(Center);

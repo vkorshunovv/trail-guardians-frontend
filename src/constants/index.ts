@@ -87,14 +87,16 @@ export interface EventProps {
   isRightSidebarOpen: boolean;
   setEventCreated: (isEventCreated: boolean) => void;
   isEventCreated: boolean;
-  setUserEvents: React.Dispatch<React.SetStateAction<JoinData[]>>;
+  setUserEvents: React.Dispatch<React.SetStateAction<any[]>>;
+  isLogin: boolean;
 }
 
 export interface EventsListProps {
   events: EventData[];
   setEvents: React.Dispatch<React.SetStateAction<EventData[]>>;
   isRightSidebarOpen: boolean;
-  setUserEvents: React.Dispatch<React.SetStateAction<JoinData[]>>;
+  setUserEvents: React.Dispatch<React.SetStateAction<any[]>>;
+  isLogin: boolean;
 }
 
 export interface MetricsData {
@@ -129,18 +131,18 @@ export interface LoginProps {
   setModalOpen: (isOpen: boolean) => void;
   setLogin: (isLogin: boolean) => void;
   setUserName: (user: string) => void;
+  setUserEvents: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
 export interface UserProfileProps {
   userName: string;
   setLogin: (isLogin: boolean) => void;
-  userEvents: JoinData[];
+  userEvents: any[];
 }
 
 export interface JoinData {
   id: number;
+  title: string;
   date: string;
   location: string;
-  userEvents: JoinData[];
-  setUserEvents: React.Dispatch<React.SetStateAction<JoinData[]>>;
 }

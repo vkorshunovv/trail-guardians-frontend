@@ -72,6 +72,7 @@
 
 .list-container li p {
     margin: .8vh;
+    font-weight: 300;
 }
 
 .list-container li span {
@@ -80,8 +81,9 @@
 
 .list-container li h3 {
     padding: .5vw;
-    font-style: italic;
+    /* font-style: italic; */
     font-family: "Quicksand", sans-serif;
+    font-weight: 600;
 }
 
 .inactive {

@@ -63,7 +63,7 @@ const ImpactMetrics = () => {
   return (
     <div className="impact-metrics">
       <div>
-        <p>Total Completed Events</p>
+        <p>Already Events Created</p>
         <span>{metrics.totalEvents}</span>
       </div>
       <div>
