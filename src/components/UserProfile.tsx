@@ -1,14 +1,11 @@
 import { EventData, UserProfileProps } from "../constants";
 import { formatDate } from "../utils/dateFormat";
+import { formatLocation } from "../utils/locationFormat";
 import { useEffect, useState } from "react";
 import { getEvents } from "../services/eventService";
+import "../styles/UserProfile.css";
 
-const UserProfile = ({
-  userName,
-  setLogin,
-  userEvents,
-  eventsAssociated,
-}: UserProfileProps) => {
+const UserProfile = ({ userName, setLogin, userEvents }: UserProfileProps) => {
   const [joinedEvents, setJoinedEvents] = useState<any[]>([]);
 
   useEffect(() => {
@@ -42,12 +39,12 @@ const UserProfile = ({
   }, [userEvents]);
 
   const handleLogOut = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
+    // localStorage.removeItem("user");
+    // localStorage.removeItem("token");
     setLogin(false);
   };
 
-  const mapAssociatedEmails = (eventId) => {
+  const mapAssociatedEmails = (eventId: number) => {
     const localEventsEmails = JSON.parse(
       localStorage.getItem("eventsEmails") || "{}"
     );
@@ -55,18 +52,20 @@ const UserProfile = ({
     return Object.keys(localEventsEmails).includes(String(eventId))
       ? localEventsEmails[eventId]
       : null;
-  };
+  }; // It is TEMPORAL solution, need to move logic to BE, it is not secure!
 
   return (
-    <div>
-      <p>Hello, {userName} 👋</p>
-      <p>Your current level : 'Volunteer'</p>
-      <p>Events you already have joined: </p>
+    <div className="user-profile-container">
+      <h1 className="user-profile-greeting">Hello, {userName} 👋</h1>
+      <h2 className="joined-events-title">Events you already have joined: </h2>
       <ul>
         {joinedEvents.map((event) => (
           <li key={event.id}>
-            {event.location} - {formatDate(event.date)} <br />
-            <p>Send a message to event creator: </p>
+            <p>
+              {formatLocation(event.location)} - {formatDate(event.date)}{" "}
+            </p>
+
+            <span>Event organizer: </span>
             <span>{mapAssociatedEmails(event.id)}</span>
           </li>
         ))}

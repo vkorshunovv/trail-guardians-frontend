@@ -1,5 +1,5 @@
 import "../styles/Event.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { createEvent } from "../services/eventService";
 import { EventData, EventProps } from "../constants";
 import { SubmitHandler } from "react-hook-form";
@@ -18,7 +18,6 @@ const EventPage = ({
   setUserEvents,
   isLogin,
   userEmail,
-  setEventsAssociated,
 }: EventProps) => {
   const [isLoading, setLoading] = useState(false);
 
@@ -35,10 +34,6 @@ const EventPage = ({
       storedEventsEmails[newEvent.id] = userEmail;
       localStorage.setItem("eventsEmails", JSON.stringify(storedEventsEmails));
 
-      setEventsAssociated((prevEventsAssoc) => [
-        ...prevEventsAssoc,
-        { [newEvent.id]: userEmail },
-      ]);
       setEvents((prevEvents) => [...prevEvents, newEvent]);
       reset();
       setLoading(false);

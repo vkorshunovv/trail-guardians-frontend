@@ -89,6 +89,7 @@ export interface EventProps {
   isEventCreated: boolean;
   setUserEvents: React.Dispatch<React.SetStateAction<any[]>>;
   isLogin: boolean;
+  userEmail: string;
 }
 
 export interface EventsListProps {
@@ -132,6 +133,7 @@ export interface LoginProps {
   setLogin: (isLogin: boolean) => void;
   setUserName: (user: string) => void;
   setUserEvents: React.Dispatch<React.SetStateAction<any[]>>;
+  setUserEmail: (userEmail: string) => void;
 }
 
 export interface UserProfileProps {

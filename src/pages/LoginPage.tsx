@@ -9,7 +9,7 @@ const LoginPage = ({
   setModalOpen,
   setUserName,
   setUserEvents,
-  setUserEmail
+  setUserEmail,
 }: LoginProps) => {
   const initialValues: FormValues = {
     email: "",
@@ -25,7 +25,7 @@ const LoginPage = ({
 
   const handleSubmit = async (
     values: FormValues,
-    { setSubmitting, resetForm }: FormikHelpers<FormValues>
+    { setSubmitting, resetForm, setErrors }: FormikHelpers<FormValues>
   ) => {
     try {
       const response = await logIn(values.email, values.password);
@@ -33,14 +33,13 @@ const LoginPage = ({
 
       const userJoinedEvents = JSON.parse(localStorage.getItem("user") || "{}");
       setUserEvents(userJoinedEvents.joinedEvents);
-      setUserEmail(response.email)
-      console.log('emain in login: ', response.email);
-      
-      setLogin(true);
-      setModalOpen(false);
+      setUserEmail(response.email);
       setUserName(response.name);
+      setModalOpen(false);
+      setLogin(true);
       resetForm();
     } catch (error) {
+      setErrors({ email: "Invalid email or password" });
       //TODO popup message with following error on the screen and DO NOT allow log in
       console.log(
         `Error occurred while submitting login form: ${
