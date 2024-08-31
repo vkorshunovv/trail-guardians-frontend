@@ -3,7 +3,12 @@ import { formatDate } from "../utils/dateFormat";
 import { useEffect, useState } from "react";
 import { getEvents } from "../services/eventService";
 
-const UserProfile = ({ userName, setLogin, userEvents }: UserProfileProps) => {
+const UserProfile = ({
+  userName,
+  setLogin,
+  userEvents,
+  eventsAssociated,
+}: UserProfileProps) => {
   const [joinedEvents, setJoinedEvents] = useState<any[]>([]);
 
   useEffect(() => {
@@ -37,9 +42,19 @@ const UserProfile = ({ userName, setLogin, userEvents }: UserProfileProps) => {
   }, [userEvents]);
 
   const handleLogOut = () => {
-    // localStorage.removeItem("user");
-    // localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
     setLogin(false);
+  };
+
+  const mapAssociatedEmails = (eventId) => {
+    const localEventsEmails = JSON.parse(
+      localStorage.getItem("eventsEmails") || "{}"
+    );
+
+    return Object.keys(localEventsEmails).includes(String(eventId))
+      ? localEventsEmails[eventId]
+      : null;
   };
 
   return (
@@ -50,7 +65,9 @@ const UserProfile = ({ userName, setLogin, userEvents }: UserProfileProps) => {
       <ul>
         {joinedEvents.map((event) => (
           <li key={event.id}>
-            {event.location} - {formatDate(event.date)}
+            {event.location} - {formatDate(event.date)} <br />
+            <p>Send a message to event creator: </p>
+            <span>{mapAssociatedEmails(event.id)}</span>
           </li>
         ))}
       </ul>

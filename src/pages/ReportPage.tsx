@@ -48,7 +48,6 @@ const ReportPage = ({
       <h1>Report a Trail Area</h1>
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
         <div>
-          {/* TODO description length limit */}
           <label htmlFor="description">Description</label>
           <textarea
             id="description"

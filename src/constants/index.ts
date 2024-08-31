@@ -116,9 +116,9 @@ export interface ModalProps {
 }
 
 export interface HeaderProps {
-  setModalOpen: (isOpen: boolean) => void;
-  isRegistered: boolean;
-  isLogin: boolean;
+  setModalOpen?: (isOpen: boolean) => void;
+  isRegistered?: boolean;
+  isLogin?: boolean;
 }
 
 export interface SignUpProps {

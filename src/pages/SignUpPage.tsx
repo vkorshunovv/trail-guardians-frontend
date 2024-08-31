@@ -30,13 +30,13 @@ const SignUpPage = ({
       setSubmitting(false);
       setUserName(values.name!);
     } catch (error) {
+      //TODO popup message with following error on the screen and DO NOT allow sign up
       console.log(
         `Error occurred while submitting signup form: ${
           (error as Error).message
         }`
       );
       setSubmitting(false);
-      //TODO popup message with following error on the screen
     }
   };
 
@@ -98,7 +98,7 @@ const SignUpPage = ({
               </button>
               <button
                 className="loginBtn"
-                onClick={(e) => handleLoginRedirection(e)} // Change this logic to localStorage, so it automatically know if you loged in
+                onClick={(e) => handleLoginRedirection(e)}
               >
                 Log in
               </button>

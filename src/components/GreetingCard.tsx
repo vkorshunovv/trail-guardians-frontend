@@ -25,7 +25,6 @@ const GreetingCard = ({ setMapVisible }: GreetingCardProps) => {
           </li>
         </ul>
       </button>
-      {/* <button onClick={() => setMapVisible(true)}>Flip & Go</button> */}
     </div>
   );
 };

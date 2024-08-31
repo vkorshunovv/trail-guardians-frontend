@@ -1,5 +1,5 @@
 import "../styles/Event.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createEvent } from "../services/eventService";
 import { EventData, EventProps } from "../constants";
 import { SubmitHandler } from "react-hook-form";
@@ -16,14 +16,29 @@ const EventPage = ({
   setEventCreated,
   isEventCreated,
   setUserEvents,
-  isLogin
+  isLogin,
+  userEmail,
+  setEventsAssociated,
 }: EventProps) => {
   const [isLoading, setLoading] = useState(false);
 
   const onSubmit: SubmitHandler<EventData> = async (data) => {
+    console.log("User Email", userEmail);
+
     setLoading(true);
     try {
       const newEvent = await createEvent(data);
+
+      const storedEventsEmails = JSON.parse(
+        localStorage.getItem("eventsEmails") || "{}"
+      );
+      storedEventsEmails[newEvent.id] = userEmail;
+      localStorage.setItem("eventsEmails", JSON.stringify(storedEventsEmails));
+
+      setEventsAssociated((prevEventsAssoc) => [
+        ...prevEventsAssoc,
+        { [newEvent.id]: userEmail },
+      ]);
       setEvents((prevEvents) => [...prevEvents, newEvent]);
       reset();
       setLoading(false);
@@ -59,20 +74,9 @@ const EventPage = ({
             id="title"
             maxLength={50}
             {...register("title", { required: "Title is required" })}
-            placeholder="Max. 50 characters"
+            placeholder="Join me for clean-up trail"
           />
           {errors.title && <p className="error">{errors.title.message}</p>}
-        </div>
-        <div>
-          <label htmlFor="description">Description</label>
-          <input
-            type="text"
-            id="description"
-            {...register("description", { required: true })}
-          />
-          {errors.description && (
-            <p className="error">{errors.description.message}</p>
-          )}
         </div>
         <div>
           <label htmlFor="date">Date</label>
@@ -90,7 +94,7 @@ const EventPage = ({
             id="location"
             maxLength={50}
             {...register("location", { required: "Location is required" })}
-            placeholder="Coordinates or place"
+            placeholder="e.g., Picos de Europa area"
           />
           {errors.location && (
             <p className="error">{errors.location.message}</p>

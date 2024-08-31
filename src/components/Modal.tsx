@@ -15,7 +15,7 @@ const Modal = ({ isOpen, onRequestClose, children }: ModalProps) => {
       closeTimeoutMS={300}
     >
       <button className="close-button" onClick={onRequestClose}>
-        <FaXmark style={{color: 'white'}}/>
+        <FaXmark style={{ color: "white" }} />
       </button>
       {children}
     </ReactModal>

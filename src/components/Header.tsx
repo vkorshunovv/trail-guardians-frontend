@@ -9,9 +9,9 @@ const Header = ({ setModalOpen, isRegistered, isLogin }: HeaderProps) => {
         <p>TrailGuardians</p>
       </Link>
       {isLogin ? (
-        <button onClick={() => setModalOpen(true)}>Profile</button>
+        <button onClick={() => setModalOpen!(true)}>Profile</button>
       ) : (
-        <button onClick={() => setModalOpen(true)}>
+        <button onClick={() => setModalOpen!(true)}>
           {isRegistered ? "Log in" : "Sign up"}
         </button>
       )}

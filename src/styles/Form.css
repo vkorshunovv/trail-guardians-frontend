@@ -42,6 +42,10 @@ form {
     color: #000;
 }
 
+.form-container input::placeholder, .form-container textarea::placeholder  {
+    font-style: italic;
+}
+
 .form-container .error {
     margin-top: .3rem;
     color: rgb(255, 0, 0);

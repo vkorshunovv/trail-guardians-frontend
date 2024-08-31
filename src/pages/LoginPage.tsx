@@ -4,7 +4,13 @@ import "../styles/Form.css";
 import { FormValues, LoginProps } from "../constants";
 import { logIn } from "../services/authService";
 
-const LoginPage = ({ setLogin, setModalOpen, setUserName, setUserEvents }: LoginProps) => {
+const LoginPage = ({
+  setLogin,
+  setModalOpen,
+  setUserName,
+  setUserEvents,
+  setUserEmail
+}: LoginProps) => {
   const initialValues: FormValues = {
     email: "",
     password: "",
@@ -25,15 +31,17 @@ const LoginPage = ({ setLogin, setModalOpen, setUserName, setUserEvents }: Login
       const response = await logIn(values.email, values.password);
       console.log("Login successful ", response);
 
-      const userJoinedEvents = JSON.parse(localStorage.getItem('user') || '{}')
-      setUserEvents(userJoinedEvents.joinedEvents)
-
+      const userJoinedEvents = JSON.parse(localStorage.getItem("user") || "{}");
+      setUserEvents(userJoinedEvents.joinedEvents);
+      setUserEmail(response.email)
+      console.log('emain in login: ', response.email);
+      
       setLogin(true);
       setModalOpen(false);
       setUserName(response.name);
       resetForm();
     } catch (error) {
-      //TODO popup message with following error on the screen
+      //TODO popup message with following error on the screen and DO NOT allow log in
       console.log(
         `Error occurred while submitting login form: ${
           (error as Error).message

@@ -21,10 +21,20 @@ const HomePage = () => {
   const [reports, setReports] = useState<ReportData[]>([]);
   const [events, setEvents] = useState<EventData[]>([]);
   const [isLeftSidebarOpen, setLeftSidebarOpen] = useState<boolean>(false);
-  const [isRightSidebarOpen, setRightSidebarOpen] = useState<boolean>(true);
-  const [isEventCreated, setEventCreated] = useState<boolean>(true);
+  const [isRightSidebarOpen, setRightSidebarOpen] = useState<boolean>(false);
+  const [isEventCreated, setEventCreated] = useState<boolean>(false);
   const [userName, setUserName] = useState("");
   const [userEvents, setUserEvents] = useState<any[]>([]);
+  const [userEmail, setUserEmail] = useState("");
+  const [eventsAssociated, setEventsAssociated] = useState<
+    {
+      [key: number]: string;
+    }[]
+  >([]);
+
+  useEffect(() => {
+    console.log("Events Associated to Users: ", eventsAssociated);
+  }, [eventsAssociated]);
 
   const {
     register: registerReport,
@@ -80,6 +90,7 @@ const HomePage = () => {
               userName={userName}
               setLogin={setLogin}
               userEvents={userEvents}
+              eventsAssociated={eventsAssociated}
             />
           ) : isRegistered ? (
             <LoginPage
@@ -87,6 +98,7 @@ const HomePage = () => {
               setModalOpen={setModalOpen}
               setUserName={setUserName}
               setUserEvents={setUserEvents}
+              setUserEmail={setUserEmail}
             />
           ) : (
             <SignUpPage
@@ -127,6 +139,8 @@ const HomePage = () => {
           isEventCreated={isEventCreated}
           setUserEvents={setUserEvents}
           isLogin={isLogin}
+          userEmail={userEmail}
+          setEventsAssociated={setEventsAssociated}
         />
       </section>
     </div>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getEvents, joinEvent } from "../services/eventService";
 import { formatDate } from "../utils/dateFormat";
-import { EventsListProps } from "../constants";
+import { EventData, EventsListProps } from "../constants";
 
 const EventsListPage = ({
   events,
@@ -20,11 +20,25 @@ const EventsListPage = ({
   useEffect(() => {
     const fetchEvents = async () => {
       const fetchedEvents = await getEvents();
-      setEvents(fetchedEvents.reverse());
-      //TODO sort by title number
+      const sortedEvents = fetchedEvents.sort(
+        (a: EventData, b: EventData) => b.id - a.id
+      );
+      setEvents(sortedEvents);
+
+      const user = JSON.parse(localStorage.getItem("user") || "{}");
+      if (user.joinedEvents) {
+        const initialJoinedStates = user.joinedEvents.reduce(
+          (acc: { [key: number]: boolean }, eventId: number) => {
+            acc[eventId] = true;
+            return acc;
+          },
+          {}
+        );
+        setJoinedStates(initialJoinedStates);
+      }
     };
     fetchEvents();
-  }, []);
+  }, [setEvents]);
 
   const handleJoinEvent = async (eventId: number) => {
     try {
@@ -91,10 +105,8 @@ const EventsListPage = ({
                   <span style={{ color: "rgb(112 169 119)" }}>#{event.id}</span>{" "}
                   "{event.title}"
                 </h3>
-                {/* <p>{event.description}</p> */}
                 <p>📆 {formatDate(event.date)}</p>
-                <p>📍 {event.location}</p>{" "}
-                {/* allow only place, NOT coordinates */}
+                <p>📍 {event.location}</p>
                 <p>
                   🪵 Volunteers Needed: <span>{event.volunteersNeeded}</span>
                 </p>

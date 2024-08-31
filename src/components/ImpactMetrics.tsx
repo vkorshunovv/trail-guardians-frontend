@@ -32,11 +32,11 @@ const ImpactMetrics = () => {
             targetMetrics.totalEvents
           );
           const newTrashCollected = Math.min(
-            totalTrashCollected + (increment ),
+            totalTrashCollected + increment,
             targetMetrics.totalTrashCollected
           );
           const newHoursVolunteered = Math.min(
-            totalHoursVolunteered + (increment ),
+            totalHoursVolunteered + increment,
             targetMetrics.totalHoursVolunteered
           );
 
