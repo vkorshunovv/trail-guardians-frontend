@@ -1,11 +1,11 @@
 .event {
-    margin-bottom: 4rem;
+    margin-bottom: 7vh; 
     border-radius: 1.5rem 0 0 1.5rem;
     background-color: rgb(186, 73, 73);
     padding: 1rem;
     transition: box-shadow .2s ease;
     position: fixed;
-    right: -260px;
+    right: -19.3vw;
 }
 
 .event:hover,
@@ -30,20 +30,20 @@
 }
 
 .events-list {
-    margin-bottom: 4rem;
+    margin-bottom: 5vh;
     border-radius: 1.5rem 0 0 1.5rem;
     background-color: rgb(56, 133, 138);
     flex-wrap: nowrap;
     transition: box-shadow .2s ease;
     position: fixed;
-    max-height: 470px;
-    max-width: 275px;
+    max-height: 56vh;
+    max-width: 21vw;
 
 }
 
 .events-list .list-container {
     overflow-y: scroll;
-    width: 100%;
+    /* width: 100%; */
     display: block;
     font-size: 1vw;
 }
@@ -113,5 +113,3 @@
 .button-container .join-btn {
     color: rgb(60, 104, 65)
 }
-
-/*TODO think about bundling styles with the same report styles

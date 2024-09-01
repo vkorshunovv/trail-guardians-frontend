@@ -1,11 +1,11 @@
 .report {
-    margin-bottom: 4rem;
+    margin-bottom: 5vh;
     border-radius: 0 1.5rem 1.5rem 0;
     background-color: rgb(56, 133, 138);
-    padding: 1rem;
+    padding: 1vw;
     transition: box-shadow .2s ease;
     position: fixed;
-    left: -260px;
+    left: -20vw;
 }
 
 .report:hover {
@@ -13,7 +13,7 @@
 }
 
 .report textarea {
-resize: none;
+    resize: none;
 }
 
 .button-container #report-button {

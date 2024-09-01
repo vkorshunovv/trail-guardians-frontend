@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
+    font-size: 2vw;
 }
 
 .no-page-container {
@@ -14,7 +14,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-bottom: 15rem;
+    padding-bottom: 30vh;
 }
 
 .no-page-container button {
@@ -43,5 +43,5 @@
 }
 
 .no-page-message span {
-    font-size: 5rem;
+    font-size: 5vw;
 }
