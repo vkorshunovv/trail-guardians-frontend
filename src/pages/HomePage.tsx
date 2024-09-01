@@ -27,7 +27,6 @@ const HomePage = () => {
   const [userEvents, setUserEvents] = useState<any[]>([]);
   const [userEmail, setUserEmail] = useState<string>("");
 
-
   const {
     register: registerReport,
     handleSubmit: handleSubmitReport,

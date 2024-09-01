@@ -17,18 +17,25 @@ export const TileLayerAttr = {
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors </a>',
 };
 
-export const validationSchema = Yup.object().shape({
+export const signupValidationSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, "Name must be minimum 2 characters")
-    .max(100, "Name must not be more than 100 characters")
+    .max(100, "Name must not be more than 20 characters")
     .required("Name is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string()
-    .min(6, "Password must be at least 6 characters")
+    .min(6, "Password is too short")
     .required("Password is required"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password")], "Passwords must match")
     .required("Confirmation is required"),
+});
+
+export const loginValidationSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string()
+    .min(6, "Password is too short")
+    .required("Password is required"),
 });
 
 export const initialValues: FormValues = {

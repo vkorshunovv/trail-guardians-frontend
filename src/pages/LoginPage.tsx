@@ -1,7 +1,11 @@
 import { Formik, Field, ErrorMessage, FormikHelpers } from "formik";
-import * as Yup from "yup";
 import "../styles/Form.css";
-import { FormValues, LoginProps } from "../constants";
+import {
+  initialValues,
+  FormValues,
+  LoginProps,
+  loginValidationSchema,
+} from "../constants";
 import { logIn } from "../services/authService";
 
 const LoginPage = ({
@@ -11,25 +15,15 @@ const LoginPage = ({
   setUserEvents,
   setUserEmail,
 }: LoginProps) => {
-  const initialValues: FormValues = {
-    email: "",
-    password: "",
-  };
-
-  const validationSchema = Yup.object().shape({
-    email: Yup.string().email("Invalid email").required("Email is required"),
-    password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
-  });
-
   const handleSubmit = async (
     values: FormValues,
     { setSubmitting, resetForm, setErrors }: FormikHelpers<FormValues>
   ) => {
     try {
       const response = await logIn(values.email, values.password);
-      console.log("Login successful ", response);
+      if (!response) {
+        throw new Error("Invalid login attempt");
+      } //TODO popup
 
       const userJoinedEvents = JSON.parse(localStorage.getItem("user") || "{}");
       setUserEvents(userJoinedEvents.joinedEvents);
@@ -40,7 +34,6 @@ const LoginPage = ({
       resetForm();
     } catch (error) {
       setErrors({ email: "Invalid email or password" });
-      //TODO popup message with following error on the screen and DO NOT allow log in
       console.log(
         `Error occurred while submitting login form: ${
           (error as Error).message
@@ -56,10 +49,10 @@ const LoginPage = ({
       <h1>Please Log in to your account</h1>
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchema}
+        validationSchema={loginValidationSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting, errors, handleSubmit }) => (
+        {({ isSubmitting, errors, handleSubmit, touched }) => (
           <form onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email">Email:</label>
@@ -67,7 +60,7 @@ const LoginPage = ({
               <ErrorMessage
                 name="email"
                 component="div"
-                className={errors.email ? "error" : ""}
+                className={errors.email && touched.email ? "error" : ""}
               />
             </div>
             <div>
@@ -76,7 +69,7 @@ const LoginPage = ({
               <ErrorMessage
                 name="password"
                 component="div"
-                className={errors.password ? "error" : ""}
+                className={errors.password && touched.password ? "error" : ""}
               />
             </div>
             <div className="button-container">

@@ -17,26 +17,25 @@ const ReportPage = ({
   const onSubmit: SubmitHandler<ReportData> = async (data) => {
     setIsLoading(true);
     try {
-      console.log("Submitting report:", data);
       if (data.image && data.image.length > 0) {
         const response = await createReport({
           description: data.description,
           coordinates: data.coordinates,
           image: data.image,
         });
-        console.log("Report submitted successfully:", response);
         setReports((prevReports) => [...prevReports, response]);
         reset();
-        setIsLoading(false);
       }
     } catch (error) {
       console.log(
         "Error occurred while submitting report: ",
         (error as Error).message
       );
+    } finally {
       setIsLoading(false);
     }
   };
+
   return (
     <div
       className={

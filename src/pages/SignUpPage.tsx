@@ -1,7 +1,7 @@
 import { Formik, Field, ErrorMessage, FormikHelpers } from "formik";
 import "../styles/Form.css";
 import {
-  validationSchema,
+  signupValidationSchema,
   FormValues,
   initialValues,
   SignUpProps,
@@ -18,24 +18,19 @@ const SignUpPage = ({
     { setSubmitting, resetForm }: FormikHelpers<FormValues>
   ) => {
     try {
-      const response = await signUp(
-        values.name!,
-        values.email,
-        values.password
-      );
-      console.log("Signup successful: ", response);
-      resetForm();
-      setRegistered(true);
-      setModalOpen(false);
-      setSubmitting(false);
+      await signUp(values.name!, values.email, values.password);
+
       setUserName(values.name!);
+      setModalOpen(false);
+      setRegistered(true);
+      resetForm();
     } catch (error) {
-      //TODO popup message with following error on the screen and DO NOT allow sign up
       console.log(
         `Error occurred while submitting signup form: ${
           (error as Error).message
         }`
       );
+    } finally {
       setSubmitting(false);
     }
   };
@@ -50,10 +45,10 @@ const SignUpPage = ({
       <h1>Please Sign Up as a New Trail Guardian</h1>
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchema}
+        validationSchema={signupValidationSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting, errors, handleSubmit }) => (
+        {({ isSubmitting, errors, handleSubmit, touched }) => (
           <form onSubmit={handleSubmit}>
             <div>
               <label htmlFor="name">Name</label>
@@ -61,7 +56,7 @@ const SignUpPage = ({
               <ErrorMessage
                 name="name"
                 component="div"
-                className={errors.name ? "error" : ""}
+                className={errors.name && touched.name ? "error" : ""}
               />
             </div>
             <div>
@@ -70,7 +65,7 @@ const SignUpPage = ({
               <ErrorMessage
                 name="email"
                 component="div"
-                className={errors.email ? "error" : ""}
+                className={errors.email && touched.email ? "error" : ""}
               />
             </div>
             <div>
@@ -79,7 +74,7 @@ const SignUpPage = ({
               <ErrorMessage
                 name="password"
                 component="div"
-                className={errors.password ? "error" : ""}
+                className={errors.password && touched.password ? "error" : ""}
                 //TODO restrict to copy from this field
               />
             </div>
@@ -89,7 +84,11 @@ const SignUpPage = ({
               <ErrorMessage
                 name="confirmPassword"
                 component="div"
-                className={errors.confirmPassword ? "error" : ""}
+                className={
+                  errors.confirmPassword && touched.confirmPassword
+                    ? "error"
+                    : ""
+                }
               />
             </div>
             <div className="button-container" id="signup-btn-container">

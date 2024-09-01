@@ -9,26 +9,18 @@ const UserProfile = ({ userName, setLogin, userEvents }: UserProfileProps) => {
   const [joinedEvents, setJoinedEvents] = useState<any[]>([]);
 
   useEffect(() => {
-    console.log("UserProfile userEvents prop updated:", userEvents);
-  }, [userEvents]);
-
-  useEffect(() => {
     const fetchAndFilterEvents = async () => {
       try {
-        console.log("userEvents: ", userEvents);
-
         const joinedEventsLocal = JSON.parse(
           localStorage.getItem("user") || "{}"
         );
 
         const fetchedEvents = await getEvents();
         const userEventIds = joinedEventsLocal.joinedEvents.flat();
-        console.log("User event IDs after flattening: ", userEventIds);
 
         const filteredEvents = fetchedEvents.filter((event: EventData) =>
           userEventIds.includes(event.id)
         );
-        console.log("Filtered events: ", filteredEvents);
 
         setJoinedEvents(filteredEvents);
       } catch (error) {
@@ -39,8 +31,8 @@ const UserProfile = ({ userName, setLogin, userEvents }: UserProfileProps) => {
   }, [userEvents]);
 
   const handleLogOut = () => {
-    // localStorage.removeItem("user");
-    // localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
     setLogin(false);
   };
 

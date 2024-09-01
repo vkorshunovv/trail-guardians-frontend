@@ -57,6 +57,10 @@
     padding: 1rem;
 }
 
+.list-container h3 span {
+    color: rgb(112 169 119);
+}
+
 .list-container li {
     display: flex;
     flex-direction: column;

@@ -11,7 +11,6 @@ import { useEffect, useState } from "react";
 import { MapComponentProps, Center, TileLayerAttr } from "../constants";
 import { getReports } from "../services/reportService";
 import { LatLngExpression, LatLngLiteral } from "leaflet";
-import catImage from "../assets/cat-test.png";
 
 const MapComponent = ({ reports, setReports, setValue }: MapComponentProps) => {
   const [marker, setMarker] = useState<LatLngLiteral>(Center);
@@ -80,10 +79,12 @@ const MapComponent = ({ reports, setReports, setValue }: MapComponentProps) => {
                     <span>GPS coordinates:</span> <br />
                     {report.coordinates}
                   </p>
-                  <img
-                    src={catImage} // TODO fix image display in popup from database
-                    alt={report.description}
-                  />
+                  {report.image && (
+                    <img
+                      src={`http://localhost:5000/${report.image}`}
+                      alt={report.description}
+                    />
+                  )}
                 </div>
               </Popup>
             </Marker>

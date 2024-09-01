@@ -22,8 +22,6 @@ const EventPage = ({
   const [isLoading, setLoading] = useState(false);
 
   const onSubmit: SubmitHandler<EventData> = async (data) => {
-    console.log("User Email", userEmail);
-
     setLoading(true);
     try {
       const newEvent = await createEvent(data);

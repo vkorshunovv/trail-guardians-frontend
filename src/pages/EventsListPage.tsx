@@ -52,11 +52,7 @@ const EventsListPage = ({
         );
 
         if (joinedEvents && updatedEvent) {
-          console.log("Joined Events from API: ", joinedEvents);
-          console.log("Updated event from API: ", updatedEvent);
-
           setUserEvents(joinedEvents);
-
           setEvents((prevEvents) =>
             prevEvents.map((event) =>
               event.id === updatedEvent.id ? updatedEvent : event
@@ -73,7 +69,7 @@ const EventsListPage = ({
 
         setLoadingStates((prev) => ({ ...prev, [eventId]: false }));
       } else {
-        throw new Error("Please, log in to your account before joining events");
+        throw new Error("Please, log in to account to join event");
         //TODO popup
       }
     } catch (error) {
@@ -102,8 +98,7 @@ const EventsListPage = ({
                 className={isVolunteersEnough ? "inactive" : ""}
               >
                 <h3>
-                  <span style={{ color: "rgb(112 169 119)" }}>#{event.id}</span>{" "}
-                  "{event.title}"
+                  <span>#{event.id}</span> "{event.title}"
                 </h3>
                 <p>📆 {formatDate(event.date)}</p>
                 <p>📍 {event.location}</p>

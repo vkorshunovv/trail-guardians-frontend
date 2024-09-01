@@ -41,11 +41,6 @@ export const joinEvent = async (userId: number, eventId: number) => {
     const user = JSON.parse(localStorage.getItem("user") || "{}");
     user.joinedEvents.push(joinedEvents);
     localStorage.setItem("user", JSON.stringify(user));
-    console.log(
-      "server returns final joinedEvents: ",
-      joinedEvents,
-      updatedEvent
-    );
 
     return { joinedEvents, updatedEvent };
   } catch (error) {
