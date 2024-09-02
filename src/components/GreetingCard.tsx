@@ -5,25 +5,28 @@ const GreetingCard = ({ setMapVisible }: GreetingCardProps) => {
   return (
     <div className="greeting-card">
       <button onClick={() => setMapVisible(true)}>
+        <h2>
+          Welcome to <span>TrailGuardians!</span>
+        </h2>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam
-          doloremque similique, ea unde repellendus, expedita quis iusto
-          nesciunt nemo provident quia alias consequatur dolore, corporis quod
-          placeat possimus illo enim!
+          TrailGuardians is your community platform for organizing and
+          participating in trail clean-up efforts. Here's how to get started:
         </p>
         <ul>
           <li>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Voluptatibus cupiditate esse, enim quis recusandae, ullam ipsa
-            obcaecati officia voluptates doloribus soluta, ipsam vel modi! Minus
-            facere non repellat ducimus molestias.
+            <p>
+              Notice a spot that needs attention?<span className="report-span"> Report </span> it by providing a
+              description, photo, and location.
+            </p>
           </li>
           <li>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi atque
-            quibusdam sit? Sunt quae velit sint, eum minima, fugit obcaecati
-            aperiam illo saepe placeat quo ipsa rem dolores repellendus magnam!
+            <p>
+              Browse upcoming events, sign up, and join fellow community members,
+              or just <span className="event-span">Create</span> your own!
+            </p>
           </li>
         </ul>
+        <p>Click to see the map and explore the areas that need your help!</p>
       </button>
     </div>
   );

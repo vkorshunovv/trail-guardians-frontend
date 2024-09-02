@@ -8,6 +8,7 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    margin: 0;
 }
 
 .greeting-card button {
@@ -15,18 +16,32 @@
     height: inherit;
     border: none;
     border-radius: .2rem;
-    padding: 0.5rem 1rem;
+    padding: 2vw;
     font-family: "Poppins", sans-serif;
     background-color: transparent;
     color: white;
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    text-wrap: pretty;
+}
+
+
+.greeting-card h2 {
+    font-size: 2vw;
+    margin: 0;
+}
+
+.greeting-card h2 span {
+    font-size: 2vw;
 }
 
 .greeting-card p {
     font-size: 1.2vw;
+    margin: 0;
+    line-height: 1.9;
 }
 
 .greeting-card button ul {
@@ -35,3 +50,51 @@
     gap: 2vh;
     padding: 1vw;
 }
+
+
+.greeting-card button ul li {
+    list-style: none;
+}
+
+/* .greeting-card button ul li div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+} */
+
+.greeting-card ul li p::before {
+    content: '✓';
+    color: #FFA500;
+    margin-right: 8px;
+    font-weight: bold;
+  }
+
+.greeting-card span {
+   font-size: 1.5vw;
+   color: black;
+   font-family: 'Quicksand', sans-serif;
+   padding: .2vw;
+}
+
+
+.greeting-card strong {
+    font-size: 1.5vw;
+}
+
+.greeting-card .report-span {
+    border: 1px solid #3d9bff;
+    border-radius: .6vw; 
+    background-color: #3d9bff;
+    margin: .5vw;
+    color: white;
+}
+
+.greeting-card .event-span {
+    border: 1px solid rgb(186, 73, 73);
+    border-radius: .6vw; 
+    background-color: rgb(186, 73, 73);
+    margin: .5vw;
+    color: white;
+}
+
+
