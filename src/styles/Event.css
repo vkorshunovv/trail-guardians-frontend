@@ -1,53 +1,115 @@
-/* .events-container {
+.event {
+    margin-bottom: 7vh; 
+    border-radius: 1.5rem 0 0 1.5rem;
+    background-color: rgb(186, 73, 73);
+    padding: 1rem;
+    transition: box-shadow .2s ease;
+    position: fixed;
+    right: -19.3vw;
+}
+
+.event:hover,
+.events-list:hover {
+    box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.069);
+}
+
+.button-container #event-button {
+    width: 15vw;
+    background-color: rgb(76, 15, 15);
+}
+
+.button-container #event-button:hover {
+    background-color: #fff;
+    color: rgb(186, 73, 73);
+}
+
+.right-sidebar-open {
+    transition: all .6s ease;
+    right: 0;
+
+}
+
+.events-list {
+    margin-bottom: 5vh;
+    border-radius: 1.5rem 0 0 1.5rem;
+    background-color: rgb(56, 133, 138);
+    flex-wrap: nowrap;
+    transition: box-shadow .2s ease;
+    position: fixed;
+    max-height: 56vh;
+    max-width: 21vw;
+
+}
+
+.events-list .list-container {
+    overflow-y: scroll;
+    /* width: 100%; */
+    display: block;
+    font-size: 1vw;
+}
+
+.events-list .list-container ul {
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+    align-items: flex-start;
+    margin: 0;
+    padding: 1rem;
+}
+
+.list-container h3 span {
+    color: rgb(112 169 119);
+}
+
+.list-container li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    list-style: none;
+    border: 1px solid white;
+    border-radius: 1rem;
+    padding: .2rem;
+    background-color: rgb(60, 104, 65);
+    width: 100%;
+}
+
+.list-container li p {
+    margin: .8vh;
+    font-weight: 300;
+}
+
+.list-container li span {
+    font-size: 1.2vw;
+}
+
+.list-container li h3 {
+    padding: .5vw;
+    /* font-style: italic; */
+    font-family: "Quicksand", sans-serif;
+    font-weight: 600;
+}
+
+.inactive {
+    opacity: .7;
+}
+
+.button-container {
+    width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
-} */
-
-.event-create-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.event-create-container h1 {
-    margin-bottom: 1rem;
+.button-container .join-btn {
+    width: 10vw;
+    background-color: #fff;
 }
 
-.event-create-container div {
-    margin-bottom: 1rem;
+.button-container .join-btn:hover {
+    background-color: rgb(112 169 119);
+    color: #fff;
 }
 
-.event-create-container label {
-    display: block;
-    margin-bottom: 0.5rem;
-}
 
-.event-create-container input {
-    flex: 1;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.event-create-container .error {
-    color: red;
-    font-size: 0.875rem;
-}
-
-.event-create-container button {
-    padding: 0.5rem 1rem;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.event-create-container button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+.button-container .join-btn {
+    color: rgb(60, 104, 65)
 }

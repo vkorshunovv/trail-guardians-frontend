@@ -1,104 +1,107 @@
 import { Formik, Field, ErrorMessage, FormikHelpers } from "formik";
-import * as Yup from "yup";
 import "../styles/Form.css";
-import { FormTitle } from "../constants";
-import { FormValues } from "../constants";
+import {
+  signupValidationSchema,
+  FormValues,
+  initialValues,
+  SignUpProps,
+} from "../constants";
 import { signUp } from "../services/authService";
 
-const SignUpPage: React.FC = () => {
-  const initialValues: FormValues = {
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  };
-
-  const validationSchema = Yup.object().shape({
-    name: Yup.string()
-      .min(2, "Name must be minimum 2 characters")
-      .max(100, "Name must not be more than 100 characters")
-      .required("Name is required"),
-    email: Yup.string().email("Invalid email").required("Email is required"),
-    password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password")], "Passwords must match")
-      .required("Confirm Password is required"),
-  });
-
+const SignUpPage = ({
+  setModalOpen,
+  setRegistered,
+  setUserName,
+}: SignUpProps) => {
   const handleSubmit = async (
     values: FormValues,
-    { setSubmitting }: FormikHelpers<FormValues>
+    { setSubmitting, resetForm }: FormikHelpers<FormValues>
   ) => {
     try {
-      const response = await signUp(
-        values.name!,
-        values.email,
-        values.password
-      );
-      console.log("Signup successful: ", response);
-      setTimeout(() => {
-        console.log(values);
-        setSubmitting(false);
-      }, 500);
+      await signUp(values.name!, values.email, values.password);
+
+      setUserName(values.name!);
+      setModalOpen(false);
+      setRegistered(true);
+      resetForm();
     } catch (error) {
       console.log(
-        `Error occurred while submitting signup form: ${(error as Error).message}`
+        `Error occurred while submitting signup form: ${
+          (error as Error).message
+        }`
       );
+    } finally {
       setSubmitting(false);
     }
   };
 
+  const handleLoginRedirection = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setRegistered(true);
+  };
+
   return (
     <div className="form-container">
-      <h1>{FormTitle.signup}</h1>
+      <h1>Please Sign Up as a New Trail Guardian</h1>
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchema}
+        validationSchema={signupValidationSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting, errors, handleSubmit }) => (
+        {({ isSubmitting, errors, handleSubmit, touched }) => (
           <form onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="name">Name:</label>
+              <label htmlFor="name">Name</label>
               <Field name="name" type="text" />
               <ErrorMessage
                 name="name"
                 component="div"
-                className={errors.name ? "error" : ""}
+                className={errors.name && touched.name ? "error" : ""}
               />
             </div>
             <div>
-              <label htmlFor="email">Email:</label>
+              <label htmlFor="email">Email</label>
               <Field name="email" type="email" />
               <ErrorMessage
                 name="email"
                 component="div"
-                className={errors.email ? "error" : ""}
+                className={errors.email && touched.email ? "error" : ""}
               />
             </div>
             <div>
-              <label htmlFor="password">Password:</label>
+              <label htmlFor="password">Password</label>
               <Field name="password" type="password" />
               <ErrorMessage
                 name="password"
                 component="div"
-                className={errors.password ? "error" : ""}
+                className={errors.password && touched.password ? "error" : ""}
+                //TODO restrict to copy from this field
               />
             </div>
             <div>
-              <label htmlFor="confirmPassword">Confirm Password:</label>
+              <label htmlFor="confirmPassword">Confirm Password</label>
               <Field name="confirmPassword" type="password" />
               <ErrorMessage
                 name="confirmPassword"
                 component="div"
-                className={errors.confirmPassword ? "error" : ""}
+                className={
+                  errors.confirmPassword && touched.confirmPassword
+                    ? "error"
+                    : ""
+                }
               />
             </div>
-            <button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Loading..." : "Sign up"}
-            </button>
+            <div className="button-container" id="signup-btn-container">
+              <button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Loading..." : "Sign up"}
+              </button>
+              <button
+                className="loginBtn"
+                onClick={(e) => handleLoginRedirection(e)}
+              >
+                Log in
+              </button>
+            </div>
           </form>
         )}
       </Formik>
