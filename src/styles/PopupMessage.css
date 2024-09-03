@@ -1,0 +1,30 @@
+.popup-message {
+    position: fixed;
+    width: 18vw;
+    height: 7vh;
+    padding: 10px;
+    margin-right: .3vw;
+    background-color: #4caf4f;
+    color: white;
+    border-radius: .7vw;
+    z-index: 1000;
+    animation: popup 2.1s ease;
+    transition: opacity 1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+@keyframes popup {
+    from {
+        top: -2.5vh;
+        opacity: 0;
+    }
+
+    to {
+        top: 1.8vh;
+        opacity: 1;
+    }
+}

@@ -36,14 +36,13 @@
     flex-wrap: nowrap;
     transition: box-shadow .2s ease;
     position: fixed;
-    max-height: 56vh;
+    height: 64vh;
     max-width: 21vw;
 
 }
 
 .events-list .list-container {
     overflow-y: scroll;
-    /* width: 100%; */
     display: block;
     font-size: 1vw;
 }
@@ -112,4 +111,9 @@
 
 .button-container .join-btn {
     color: rgb(60, 104, 65)
+}
+
+.button-container .back-events-btn {
+    background-color: rgb(76, 15, 15);
+    width: 15vw;
 }

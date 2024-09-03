@@ -11,7 +11,7 @@
     margin: 0;
 }
 
-.greeting-card button {
+.greeting-card section {
     width: inherit;
     height: inherit;
     border: none;
@@ -32,10 +32,7 @@
 .greeting-card h2 {
     font-size: 2vw;
     margin: 0;
-}
-
-.greeting-card h2 span {
-    font-size: 2vw;
+    font-weight: 600;
 }
 
 .greeting-card p {
@@ -44,7 +41,7 @@
     line-height: 1.9;
 }
 
-.greeting-card button ul {
+.greeting-card section ul {
     display: flex;
     flex-direction: column;
     gap: 2vh;
@@ -52,30 +49,23 @@
 }
 
 
-.greeting-card button ul li {
+.greeting-card section ul li {
     list-style: none;
 }
-
-/* .greeting-card button ul li div{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-} */
 
 .greeting-card ul li p::before {
     content: '✓';
     color: #FFA500;
     margin-right: 8px;
     font-weight: bold;
-  }
-
-.greeting-card span {
-   font-size: 1.5vw;
-   color: black;
-   font-family: 'Quicksand', sans-serif;
-   padding: .2vw;
 }
 
+.greeting-card span {
+    font-size: 1.5vw;
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    padding: .2vw;
+}
 
 .greeting-card strong {
     font-size: 1.5vw;
@@ -83,7 +73,7 @@
 
 .greeting-card .report-span {
     border: 1px solid #3d9bff;
-    border-radius: .6vw; 
+    border-radius: .6vw;
     background-color: #3d9bff;
     margin: .5vw;
     color: white;
@@ -91,10 +81,8 @@
 
 .greeting-card .event-span {
     border: 1px solid rgb(186, 73, 73);
-    border-radius: .6vw; 
+    border-radius: .6vw;
     background-color: rgb(186, 73, 73);
     margin: .5vw;
     color: white;
 }
-
-

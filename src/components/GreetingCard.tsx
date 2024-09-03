@@ -4,9 +4,9 @@ import { GreetingCardProps } from "../constants";
 const GreetingCard = ({ setMapVisible }: GreetingCardProps) => {
   return (
     <div className="greeting-card">
-      <button onClick={() => setMapVisible(true)}>
+      <section onClick={() => setMapVisible(true)}>
         <h2>
-          Welcome to <span>TrailGuardians!</span>
+          Welcome to TrailGuardians!
         </h2>
         <p>
           TrailGuardians is your community platform for organizing and
@@ -27,7 +27,7 @@ const GreetingCard = ({ setMapVisible }: GreetingCardProps) => {
           </li>
         </ul>
         <p>Click to see the map and explore the areas that need your help!</p>
-      </button>
+      </section>
     </div>
   );
 };
