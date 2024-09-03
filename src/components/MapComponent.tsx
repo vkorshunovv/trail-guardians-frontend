@@ -40,7 +40,7 @@ const MapComponent = ({ reports, setReports, setValue }: MapComponentProps) => {
   };
 
   return (
-    <MapContainer id="report-map" zoom={7} center={Center}>
+    <MapContainer id="report-map" zoom={6} center={Center}>
       <TileLayer
         url={TileLayerAttr.url}
         attribution={TileLayerAttr.attribution}

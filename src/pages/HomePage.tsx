@@ -23,7 +23,7 @@ const HomePage = () => {
   const [isLeftSidebarOpen, setLeftSidebarOpen] = useState<boolean>(false);
   const [isRightSidebarOpen, setRightSidebarOpen] = useState<boolean>(false);
   const [isEventCreated, setEventCreated] = useState<boolean>(false);
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState<string>("");
   const [userEvents, setUserEvents] = useState<any[]>([]);
   const [userEmail, setUserEmail] = useState<string>("");
 
@@ -66,6 +66,7 @@ const HomePage = () => {
           handleSubmit={handleSubmitReport}
           reset={resetReport}
           errors={reportErrors}
+          setEventCreated={setEventCreated}
         />
       </section>
 

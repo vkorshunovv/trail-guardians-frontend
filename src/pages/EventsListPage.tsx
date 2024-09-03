@@ -9,6 +9,7 @@ const EventsListPage = ({
   isRightSidebarOpen,
   setUserEvents,
   isLogin,
+  setEventCreated,
 }: EventsListProps) => {
   const [loadingStates, setLoadingStates] = useState<{
     [key: number]: boolean;
@@ -128,7 +129,17 @@ const EventsListPage = ({
               </li>
             );
           })}
-        </ul>{" "}
+        </ul>
+        <div className="button-container">
+          <button
+            className="back-events-btn"
+            onClick={() => {
+              setEventCreated(false);
+            }}
+          >
+            Create Another Event
+          </button>
+        </div>
       </div>
     </div>
   );

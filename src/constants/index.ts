@@ -66,6 +66,7 @@ export interface ReportProps {
   reset: () => void;
   errors: FieldErrors<ReportData>;
   isLeftSidebarOpen: boolean;
+  setEventCreated: (isEventCreated: boolean) => void;
 }
 
 export interface MapComponentProps {
@@ -105,6 +106,7 @@ export interface EventsListProps {
   isRightSidebarOpen: boolean;
   setUserEvents: React.Dispatch<React.SetStateAction<any[]>>;
   isLogin: boolean;
+  setEventCreated: (isEventCreated: boolean) => void;
 }
 
 export interface MetricsData {

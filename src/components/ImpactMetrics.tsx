@@ -13,8 +13,12 @@ const ImpactMetrics = () => {
 
   useEffect(() => {
     const fetchMetrics = async () => {
-      const data = await getImpactMetrics();
-      setTargetMetrics(data);
+      try {
+        const data = await getImpactMetrics();
+        setTargetMetrics(data);
+      } catch (error) {
+        console.error("Error fetching metrics:", error);
+      }
     };
     fetchMetrics();
   }, []);

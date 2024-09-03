@@ -11,6 +11,7 @@ const ReportPage = ({
   handleSubmit,
   reset,
   errors,
+  setEventCreated
 }: ReportProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -36,6 +37,11 @@ const ReportPage = ({
     }
   };
 
+  const handleEventsRedirection = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+    setEventCreated(true)
+  }
+
   return (
     <div
       className={
@@ -50,7 +56,7 @@ const ReportPage = ({
           <label htmlFor="description">Description</label>
           <textarea
             id="description"
-            maxLength={50}
+            maxLength={60}
             {...register("description", {
               required: "Description is required",
             })}
@@ -88,6 +94,8 @@ const ReportPage = ({
           <button type="submit" id="report-button" disabled={isLoading}>
             {isLoading ? "Loading..." : "Submit Report"}
           </button>
+          <span>or</span>
+          <button onClick={handleEventsRedirection} className="events-redirection-btn">Explore Events</button>
         </div>
       </form>
     </div>
