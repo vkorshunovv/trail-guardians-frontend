@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/impact";
+const API_URL = "http://13.60.190.59:5000/api/impact" || "http://localhost:5000/api/impact";
 
 export const getImpactMetrics = async () => {
   try {

@@ -15,14 +15,14 @@ const GreetingCard = ({ setMapVisible }: GreetingCardProps) => {
         <ul>
           <li>
             <p>
-              Notice a spot that needs attention?<span className="report-span"> Report </span> it by providing a
+              Notice a spot that needs attention?<span className="report-span">Report</span> it by providing a
               description, photo, and location.
             </p>
           </li>
           <li>
             <p>
               Browse upcoming events, sign up, and join fellow community members,
-              or just <span className="event-span">Create</span> your own!
+              or just<span className="event-span">Create</span> your own!
             </p>
           </li>
         </ul>

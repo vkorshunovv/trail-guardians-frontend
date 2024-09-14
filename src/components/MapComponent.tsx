@@ -81,7 +81,10 @@ const MapComponent = ({ reports, setReports, setValue }: MapComponentProps) => {
                   </p>
                   {report.image && (
                     <img
-                      src={`http://localhost:5000/${report.image}`}
+                      src={
+                        `http://13.60.190.59:5000/${report.image}` ||
+                        `http://localhost:5000/${report.image}`
+                      }
                       alt={report.description}
                     />
                   )}
