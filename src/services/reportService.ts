@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ReportData } from "../constants";
 
-const API_URL = "http://localhost:5000/api/report";
+const API_URL = "http://13.60.190.59:5000/api/report" || "http://localhost:5000/api/report";
 
 export const createReport = async (reportData: ReportData) => {
   const formData = new FormData();

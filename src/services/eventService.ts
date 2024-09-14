@@ -1,7 +1,8 @@
 import axios from "axios";
 import { EventData } from "../constants";
 
-const API_URL = "http://localhost:5000/api/event";
+const API_URL =
+  "http://13.60.190.59:5000/api/event" || "http://localhost:5000/api/event";
 
 export const getEvents = async () => {
   const response = await axios.get(API_URL, {
